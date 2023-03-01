@@ -1,0 +1,24 @@
+<ng-container>
+  <nz-table #basicTable [nzData]="dataSet">
+    <thead>
+    <tr>
+      <th>Correo electrónico</th>
+      <th>Usuario activo</th>
+      <th>Fecha de creación</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.email}}</td>
+      <td>{{data.deleted_at == null ? 'ACTIVO' : 'INACTIVO'}}</td>
+      <td>{{data.created_at}}</td>
+      <td>
+        <a>Action 一 {{data.email}}</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a>Eliminar</a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</ng-container>
