@@ -198,7 +198,32 @@ export class SupabaseService {
     return {data, error};
   }
 
-  signUp(email: string, password: string) {
-    return this.supabase.auth.signUp({email, password})
+  /*
+  name text,
+    surname text,
+    lastname text,
+    phone text,
+    customer_type text,
+    email text,
+    password text
+  * */
+  async signUp(email: string,
+               password: string,
+               name: string,
+               surname: string,
+               lastname: string,
+               phone: string,
+               customer_type: string) {
+    let {data, error} = await this.supabase
+      .rpc('create_customer', {
+        name,
+        surname,
+        lastname,
+        phone,
+        customer_type,
+        email,
+        password
+      });
+    return {data, error};
   }
 }

@@ -11,6 +11,8 @@ import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzAlertModule} from "ng-zorro-antd/alert";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import {NzDividerModule} from "ng-zorro-antd/divider";
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
     NzIconModule,
     NzAlertModule,
     NzButtonModule,
-    NzCheckboxModule
+    NzCheckboxModule,
+    NzDividerModule,
+    NzSelectModule
   ]
 })
 export class SignupModule { }

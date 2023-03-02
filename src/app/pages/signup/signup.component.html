@@ -39,6 +39,46 @@
         </ng-template>
       </nz-form-control>
     </nz-form-item>
+    <nz-divider></nz-divider>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <input nz-input placeholder="Nombre" formControlName="name"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <input nz-input placeholder="Apellido paterno" formControlName="surname"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <input nz-input placeholder="Apellido materno" formControlName="lastname"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <input nz-input placeholder="Telefono" formControlName="phone">
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="En Tua casa quiero" formControlName="customer_type">
+            <nz-option nzLabel="Quiero buscar alquiler" nzValue="0"></nz-option>
+            <nz-option nzLabel="Quiero alquilar" nzValue="1"></nz-option>
+            <nz-option nzLabel="Quiero hacer ambos" nzValue="2"></nz-option>
+          </nz-select>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
     <nz-form-item>
       <label nz-checkbox formControlName="acceptTerms">
         <span>Acepto los <a href="/terms">términos y condiciones</a></span>
