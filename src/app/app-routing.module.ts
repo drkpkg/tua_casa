@@ -1,9 +1,16 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   //{ path: '', pathMatch: 'full', redirectTo: '/dashboard' },
-  {path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule), pathMatch: "full"},
+  {
+    path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule), pathMatch: "full"
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./pages/signup/signup.module').then(m => m.SignupModule),
+    pathMatch: "full"
+  },
   {
     path: 'clients',
     loadChildren: () => import('./pages/client/client.module').then(m => m.ClientModule),
@@ -25,16 +32,6 @@ const routes: Routes = [
     pathMatch: "full"
   },
   {
-    path: 'flightStaffs',
-    loadChildren: () => import('./pages/flight-staff/flight-staff.module').then(m => m.FlightStaffModule),
-    pathMatch: "full"
-  },
-  {
-    path: 'flightStaffs/:id',
-    loadChildren: () => import('./pages/flight-staff/flight-staff.module').then(m => m.FlightStaffModule),
-    pathMatch: "full"
-  },
-    {
     path: 'staff',
     loadChildren: () => import('./pages/staff/staff.module').then(m => m.StaffModule),
     pathMatch: "full"
@@ -55,16 +52,6 @@ const routes: Routes = [
     pathMatch: "full"
   },
   {
-    path: 'flights',
-    loadChildren: () => import('./pages/flight/flight.module').then(m => m.FlightModule),
-    pathMatch: "full"
-  },
-  {
-    path: 'flights/:id',
-    loadChildren: () => import('./pages/flight/flight.module').then(m => m.FlightModule),
-    pathMatch: "full"
-  },
-  {
     path: 'sales',
     loadChildren: () => import('./pages/sale/sale.module').then(m => m.SaleModule),
     pathMatch: "full"
@@ -72,26 +59,6 @@ const routes: Routes = [
   {
     path: 'sales/:id',
     loadChildren: () => import('./pages/sale/sale.module').then(m => m.SaleModule),
-    pathMatch: "full"
-  },
-  {
-    path: 'aircrafts',
-    loadChildren: () => import('./pages/aircraft/aircraft.module').then(m => m.AircraftModule),
-    pathMatch: "full"
-  },
-  {
-    path: 'aircrafts/:id',
-    loadChildren: () => import('./pages/aircraft/aircraft.module').then(m => m.AircraftModule),
-    pathMatch: "full"
-  },
-  {
-    path: 'airports',
-    loadChildren: () => import('./pages/airport/airport.module').then(m => m.AirportModule),
-    pathMatch: "full"
-  },
-  {
-    path: 'airports/:id',
-    loadChildren: () => import('./pages/airport/airport.module').then(m => m.AirportModule),
     pathMatch: "full"
   },
   {
@@ -119,6 +86,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/user/user.module').then(m => m.UserModule),
     pathMatch: "full",
   },
+  {
+    path: 'terms',
+    loadChildren: () => import('./pages/term/term.module').then(m => m.TermModule),
+    pathMatch: "full",
+  }
 ];
 
 @NgModule({

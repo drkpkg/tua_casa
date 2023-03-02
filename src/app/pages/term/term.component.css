@@ -1,0 +1,23 @@
+.terms-container {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.terms-container__terms {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.terms-container__terms__content {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.terms-container__terms__title {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 0 20px;
+}

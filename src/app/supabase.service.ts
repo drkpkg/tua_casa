@@ -1,11 +1,5 @@
 import {Injectable} from '@angular/core';
-import {
-  AuthChangeEvent,
-  AuthSession,
-  createClient,
-  Session, SupabaseClient,
-  User,
-} from '@supabase/supabase-js'
+import {AuthChangeEvent, AuthSession, createClient, Session, SupabaseClient, User,} from '@supabase/supabase-js'
 import {environment} from 'src/enviroments/environment';
 
 export interface Profile {
@@ -202,5 +196,9 @@ export class SupabaseService {
   async paymentMethods() {
     const {data, error} = await this.supabase.from('payment_methods').select('*')
     return {data, error};
+  }
+
+  signUp(email: string, password: string) {
+    return this.supabase.auth.signUp({email, password})
   }
 }

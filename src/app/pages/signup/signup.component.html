@@ -1,4 +1,4 @@
-<div class="login-container">
+<div class="signup-container">
   <h2>Iniciar sesión</h2>
   <img src="https://ng.ant.design/assets/img/logo.svg" alt="Imagen de inicio de sesión">
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" nz-form [nzLayout]="'horizontal'">
@@ -26,6 +26,26 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
+        <nz-input-group [nzSuffix]="suffixTemplate" nzPrefixIcon="lock">
+          <input nz-input placeholder="Contraseña" formControlName="passwordConfirm"
+                 [type]="!passwordConfirmationVisible ? 'password' : 'text'"/>
+        </nz-input-group>
+        <ng-template #suffixTemplate>
+          <span
+            nz-icon
+            [nzType]="!passwordConfirmationVisible ? 'eye-invisible' : 'eye'"
+            (click)="passwordConfirmationVisible = !passwordConfirmationVisible"
+          ></span>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <label nz-checkbox formControlName="acceptTerms">
+        <span>Acepto los <a href="/terms">términos y condiciones</a></span>
+      </label>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
         <button nz-button nzType="primary" [disabled]="!formGroup.valid" nzBlock>Iniciar sesión</button>
       </nz-form-control>
     </nz-form-item>
@@ -47,5 +67,6 @@
       <p class="text-center">
         ¿No tienes una cuenta? <a routerLink="/signup">Regístrate</a>
     </ng-container>
+
   </form>
 </div>
