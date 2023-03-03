@@ -86,7 +86,7 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <button nz-button nzType="primary" [disabled]="!formGroup.valid" nzBlock>Iniciar sesión</button>
+        <button nz-button nzType="primary" [disabled]="!formGroup.valid" nzBlock>Crear cuenta</button>
       </nz-form-control>
     </nz-form-item>
 
@@ -102,11 +102,5 @@
         <p>{{errorMessage}}</p>
       </ng-template>
     </ng-container>
-    <ng-container>
-      <!-- signup -->
-      <p class="text-center">
-        ¿No tienes una cuenta? <a routerLink="/signup">Regístrate</a>
-    </ng-container>
-
   </form>
 </div>

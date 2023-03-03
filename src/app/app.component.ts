@@ -29,9 +29,6 @@ export class AppComponent {
         }
       });
     }else{
-      if (this.router.url != '/login'){
-        this.router.navigate(['/login']);
-      }
       if (this.router.url == '/terms'){
         this.router.navigate(['/terms']);
       }
