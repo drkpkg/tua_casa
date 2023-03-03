@@ -1,0 +1,27 @@
+<!--
+id
+email
+identity_document
+name
+surname
+lastname
+phone
+-->
+<ng-container>
+  <nz-row>
+    <nz-card [nzLoading]="loading" style="width: 100%">
+      <nz-card-meta
+        nzTitle="Nombre"
+        nzDescription="{{customer?.name}} {{customer?.surname}} {{customer?.lastname}}"></nz-card-meta>
+      <nz-divider nzType="horizontal"></nz-divider>
+      <nz-card-meta nzTitle="Correo" nzDescription="{{customer?.email}}"></nz-card-meta>
+      <nz-divider nzType="horizontal"></nz-divider>
+      <nz-card-meta nzTitle="Teléfono" nzDescription="{{customer?.phone}}"></nz-card-meta>
+      <nz-divider nzType="horizontal"></nz-divider>
+      <nz-card-meta nzTitle="Documento de identidad" nzDescription="{{customer?.identity_document}}"></nz-card-meta>
+    </nz-card>
+    <nz-button-group>
+      <button nz-button nzType="primary" (click)="back()">Regresar</button>
+    </nz-button-group>
+  </nz-row>
+</ng-container>

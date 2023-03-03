@@ -44,6 +44,17 @@
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
+          <nz-input-group>
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Tipo de cliente" formControlName="customer_type">
+              <nz-option nzLabel="Quiero buscar alquiler" nzValue="0"></nz-option>
+              <nz-option nzLabel="Quiero alquilar" nzValue="1"></nz-option>
+              <nz-option nzLabel="Quiero hacer ambos" nzValue="2"></nz-option>
+            </nz-select>
+          </nz-input-group>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
           <button nz-button nzType="primary" [disabled]="!formGroup.valid">Crear cliente</button>
         </nz-form-control>
       </nz-form-item>

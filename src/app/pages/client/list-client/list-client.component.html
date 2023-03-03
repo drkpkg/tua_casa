@@ -16,12 +16,19 @@
         <td>{{data.email}}</td>
         <td>{{data.phone}}</td>
         <td>
-          <a>Action 一 {{data.email}}</a>
+          <a routerLink="/clients/{{data.id}}">Ver</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>Eliminar</a>
+          <a (click)="showModal(data.id)">Elmininar</a>
         </td>
       </tr>
       </tbody>
     </nz-table>
 </ng-container>
-  
+<ng-container>
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="Eliminar?" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <ng-container *nzModalContent>
+      <p>¿Está seguro que desea eliminar este cliente?</p>
+      <p>Esta acción no se puede deshacer</p>
+    </ng-container>
+  </nz-modal>
+</ng-container>

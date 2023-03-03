@@ -91,19 +91,6 @@ export class SupabaseService {
     return {data, error};
   }
 
-  async createCustomer(name: string, surname: string, lastname: string, identity_document: string, email: string, phone: string, active: boolean) {
-    const {data, error} = await this.supabase.rpc('create_customer_person', {
-      name: name,
-      surname: surname,
-      lastname: lastname,
-      identity_document: identity_document,
-      email: email,
-      phone: phone,
-      active: active
-    });
-    return {data, error};
-  }
-
   async createCountry(name: string) {
     const {data, error} = await this.supabase.from('countries').insert([
       {name: name, active: true}
@@ -198,32 +185,37 @@ export class SupabaseService {
     return {data, error};
   }
 
-  /*
-  name text,
-    surname text,
-    lastname text,
-    phone text,
-    customer_type text,
-    email text,
-    password text
-  * */
-  async signUp(email: string,
-               password: string,
-               name: string,
-               surname: string,
-               lastname: string,
-               phone: string,
-               customer_type: string) {
+  async createCustomer(
+    name: string,
+    surname: string,
+    lastname: string,
+    identity_document: string,
+    phone: string,
+    email: string,
+    customer_type: string,
+  ) {
     let {data, error} = await this.supabase
-      .rpc('create_customer', {
-        name,
-        surname,
-        lastname,
-        phone,
-        customer_type,
-        email,
-        password
-      });
-    return {data, error};
+      .rpc('create_customer_person', {
+        name: name,
+        surname: surname,
+        lastname: lastname,
+        identity_document: identity_document,
+        phone: phone,
+        email: email,
+        customer_type: customer_type,
+      })
+    return {data, error}
+  }
+
+  deleteCustomer(id: number) {
+    const res = this.supabase.rpc('delete_customer_person', {
+      customer_id: id,
+    })
+    return res;
+  }
+
+  getCustomerById(id: number) {
+    const res = this.supabase.from('customer_view').select('*').eq('id', id)
+    return res;
   }
 }

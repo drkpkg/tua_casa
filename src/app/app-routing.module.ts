@@ -16,12 +16,12 @@ const routes: Routes = [
   },
   {
     path: 'clients',
-    loadChildren: () => import('./pages/client/client.module').then(m => m.ClientModule),
+    loadChildren: () => import('./pages/client/client-info.module').then(m => m.ClientInfoModule),
     pathMatch: "full"
   },
   {
     path: 'clients/:id',
-    loadChildren: () => import('./pages/client/client.module').then(m => m.ClientModule),
+    loadChildren: () => import('./pages/client-info/client-info.module').then(m => m.ClientInfoModule),
     pathMatch: "full"
   },
   {
