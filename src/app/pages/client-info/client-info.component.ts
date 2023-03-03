@@ -25,7 +25,6 @@ export class ClientInfoComponent implements OnInit {
         if (error) {
           console.log('error', error)
         } else {
-          console.log(data)
           this.customer = data[0];
           this.loading = false;
         }
