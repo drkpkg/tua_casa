@@ -22,12 +22,12 @@ export class SignupComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [Validators.required]),
       passwordConfirm: new FormControl('', [Validators.required]),
-      acceptTerms: new FormControl(false, [Validators.requiredTrue]),
-      name: new FormControl('', [Validators.requiredTrue]),
-      surname: new FormControl('', [Validators.requiredTrue]),
-      lastname: new FormControl('', [Validators.requiredTrue]),
-      phone: new FormControl('', [Validators.requiredTrue]),
-      customer_type: new FormControl('', [Validators.requiredTrue]),
+      acceptTerms: new FormControl(false, [Validators.required, Validators.requiredTrue]),
+      name: new FormControl('', [Validators.required]),
+      surname: new FormControl('', [Validators.required]),
+      lastname: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required]),
+      customer_type: new FormControl('', [Validators.required]),
     });
     this.passwordVisible = false;
     this.passwordConfirmationVisible = false;
@@ -39,25 +39,25 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.formGroup.valid) {
-      if (this.formGroup.value.password === this.formGroup.value.passwordConfirm) {
-        this.supabaseService.signUp(
-          this.formGroup.value.name,
-          this.formGroup.value.surname,
-          this.formGroup.value.lastname,
-          this.formGroup.value.phone,
-          this.formGroup.value.customer_type,
-          this.formGroup.value.email,
-          this.formGroup.value.password
-        ).then((result) => {
-          if (result.error) {
-            this.error = true;
-            this.errorMessage = result.error.message;
-          } else {
-            this.router.navigate(['/login']);
-          }
-        });
-      }
+    console.log(this.formGroup.valid);
+    console.log(this.formGroup.errors);
+    if (this.formGroup.valid && this.formGroup.value.password === this.formGroup.value.passwordConfirm) {
+      this.supabaseService.signUp(
+        this.formGroup.value.name,
+        this.formGroup.value.surname,
+        this.formGroup.value.lastname,
+        this.formGroup.value.phone,
+        this.formGroup.value.customer_type,
+        this.formGroup.value.email,
+        this.formGroup.value.password
+      ).then((result) => {
+        if (result.error) {
+          this.error = true;
+          this.errorMessage = result.error.message;
+        } else {
+          this.router.navigate(['/login']);
+        }
+      });
     }
   }
 }
