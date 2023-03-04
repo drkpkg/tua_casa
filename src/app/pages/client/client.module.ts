@@ -12,12 +12,12 @@ import {NzIconModule} from 'ng-zorro-antd/icon';
 import {NzFormModule} from 'ng-zorro-antd/form';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NzInputModule} from 'ng-zorro-antd/input';
-import {NewUserComponent} from '../user/new-user/new-user.component';
 import {NewClientComponent} from './new-client/new-client.component';
 import {NzMessageModule} from 'ng-zorro-antd/message';
 import {NzCardModule} from 'ng-zorro-antd/card';
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzModalModule} from "ng-zorro-antd/modal";
+import {NzImageModule} from "ng-zorro-antd/image";
 
 
 @NgModule({
@@ -40,8 +40,9 @@ import {NzModalModule} from "ng-zorro-antd/modal";
     NzMessageModule,
     NzCardModule,
     NzSelectModule,
-    NzModalModule
+    NzModalModule,
+    NzImageModule
   ]
 })
-export class ClientInfoModule {
+export class ClientModule {
 }
