@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'clients',
-    loadChildren: () => import('./pages/client/client-info.module').then(m => m.ClientInfoModule),
+    loadChildren: () => import('./pages/client/client.module').then(m => m.ClientModule),
     pathMatch: "full"
   },
   {
