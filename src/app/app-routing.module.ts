@@ -93,7 +93,17 @@ const routes: Routes = [
     path: 'terms',
     loadChildren: () => import('./pages/term/term.module').then(m => m.TermModule),
     pathMatch: "full",
+  },
+  {
+    path: 'rents',
+    loadChildren: () => import('./pages/rent/rent.module').then(m => m.RentModule),
+    pathMatch: "full",
+  },
+  {
+    path: 'rents/:id',
+    loadChildren: () => import('./pages/rent-info/rent-info.module').then(m => m.RentInfoModule),
   }
+
 ];
 
 @NgModule({
