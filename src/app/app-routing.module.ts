@@ -102,6 +102,22 @@ const routes: Routes = [
   {
     path: 'rents/:id',
     loadChildren: () => import('./pages/rent-info/rent-info.module').then(m => m.RentInfoModule),
+    pathMatch: "full",
+  },
+  {
+    path: 'properties',
+    loadChildren: () => import('./pages/property/property.module').then(m => m.PropertyModule),
+    pathMatch: "full",
+  },
+  {
+    path: 'properties/:id',
+    loadChildren: () => import('./pages/property-info/property-info.module').then(m => m.PropertyInfoModule),
+    pathMatch: "full",
+  },
+  {
+    path: 'properties/:id/info',
+    loadChildren: () => import('./pages/property-info/property-info.module').then(m => m.PropertyInfoModule),
+    pathMatch: "full",
   }
 
 ];

@@ -1,0 +1,33 @@
+<ng-container>
+  <nz-table #basicTable [nzData]="dataSet">
+    <thead>
+    <tr>
+      <th>Dirección</th>
+      <th>Tipo de propiedad</th>
+      <th>Tamaño</th>
+      <th>Dueño</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.address}}</td>
+      <td>{{data.propertyType}}</td>
+      <td>{{data.size}}</td>
+      <td>{{data.owner}}</td>
+      <td>
+        <a routerLink="/properties/{{data.id}}">Ver</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="showModal(data.id)">Elmininar</a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</ng-container>
+<ng-container>
+  <nz-modal [(nzVisible)]="isVisible" nzTitle="Eliminar?" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <ng-container *nzModalContent>
+      <p>¿Está seguro que desea eliminar este cliente?</p>
+      <p>Esta acción no se puede deshacer</p>
+    </ng-container>
+  </nz-modal>
+</ng-container>
