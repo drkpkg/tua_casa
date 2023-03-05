@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {SupabaseService} from "../../supabase.service";
+import {SupabaseService} from "../../../supabase.service";
 
 
 @Component({

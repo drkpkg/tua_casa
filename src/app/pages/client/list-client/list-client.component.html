@@ -1,28 +1,38 @@
 <ng-container>
-    <nz-table #basicTable [nzData]="dataSet">
-      <thead>
+   <nz-select class="nz-select--large" [(ngModel)]="selectedType" (ngModelChange)="filterTable()">
+      <nz-option nzLabel="Todos" nzValue="all"></nz-option>
+      <nz-option nzLabel="Dueños" nzValue="0"></nz-option>
+      <nz-option nzLabel="Arrendatarios" nzValue="1"></nz-option>
+      <nz-option nzLabel="Dueños e Arrendatarios" nzValue="2"></nz-option>
+    </nz-select>
+    <button nz-button nzType="primary" (click)="filterTable()">Filtrar</button>
+  <nz-table #basicTable [nzData]="dataSet">
+    <thead>
       <tr>
         <th>Nombre y apellido</th>
         <th>Documento de identidad</th>
         <th>Correo electrónico</th>
         <th>Telefono</th>
+        <th>Tipo de cliente</th>
         <th>Acciones</th>
       </tr>
-      </thead>
-      <tbody>
+    </thead>
+    <tbody>
       <tr *ngFor="let data of basicTable.data">
         <td>{{data.fullName}}</td>
         <td>{{data.identity_document}}</td>
         <td>{{data.email}}</td>
         <td>{{data.phone}}</td>
+        <td>{{ data.customer_type === 0 ? 'Dueño' : data.customer_type === 1 ? 'Arrendatario' : 'Dueño e Inquilino' }}
+        </td>
         <td>
           <a routerLink="/clients/{{data.id}}">Ver</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a (click)="showModal(data.id)">Elmininar</a>
         </td>
       </tr>
-      </tbody>
-    </nz-table>
+    </tbody>
+  </nz-table>
 </ng-container>
 <ng-container>
   <nz-modal [(nzVisible)]="isVisible" nzTitle="Eliminar?" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
