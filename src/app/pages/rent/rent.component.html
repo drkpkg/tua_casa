@@ -1,1 +1,42 @@
-<p>rent works!</p>
+<ng-container>
+  <nz-button-group>
+    <button nz-button nzType="primary" routerLink="/rents/new">Nuevo</button>
+  </nz-button-group>
+</ng-container>
+<ng-container>
+  <nz-table #basicTable [nzData]="dataSet">
+    <thead>
+    <tr>
+      <th>Lugar</th>
+      <th>Fecha de inicio</th>
+      <th>Fecha de fin</th>
+      <th>Monto</th>
+      <th>Acciones</th>
+      <th>Dueño</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.property_id}}</td>
+      <td>{{data.start_date}}</td>
+      <td>{{data.end_date}}</td>
+      <td>{{data.amount}}</td>
+      <td>{{data.customer_id}}</td>
+      <td>
+        <a routerLink="/rents/{{data.id}}">Ver</a>
+        <nz-divider nzType="vertical"></nz-divider>
+<!--        <a (click)="showModal(data.id)">Elmininar</a>-->
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</ng-container>
+<!--<ng-container>-->
+<!--  <nz-modal [(nzVisible)]="isVisible" nzTitle="Eliminar?" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">-->
+<!--    <ng-container *nzModalContent>-->
+<!--      <p>¿Está seguro que desea eliminar este cliente?</p>-->
+<!--      <p>Esta acción no se puede deshacer</p>-->
+<!--    </ng-container>-->
+<!--  </nz-modal>-->
+<!--</ng-container>-->
+

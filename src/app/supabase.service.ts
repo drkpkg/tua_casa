@@ -207,15 +207,25 @@ export class SupabaseService {
     return {data, error}
   }
 
-  deleteCustomer(id: number) {
-    const res = this.supabase.rpc('delete_customer_person', {
+  async deleteCustomer(id: number) {
+    const {data, error} = await this.supabase.rpc('delete_customer_person', {
       customer_id: id,
     })
-    return res;
+    return {data, error}
   }
 
-  getCustomerById(id: number) {
-    const res = this.supabase.from('customer_view').select('*').eq('id', id)
-    return res;
+  async getCustomerById(id: number) {
+    const {data, error} = await this.supabase.from('customer_view').select('*').eq('id', id)
+    return {data, error};
+  }
+
+  async getRentals() {
+    const {data, error} = await this.supabase.from('rentals').select('*')
+    return {data, error};
+  }
+
+  async getProperties() {
+    const {data, error} = await this.supabase.from('properties').select('*')
+    return {data, error};
   }
 }

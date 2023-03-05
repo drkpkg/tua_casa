@@ -24,9 +24,11 @@ export class ClientInfoComponent implements OnInit {
       this.supabaseService.getCustomerById(this.id).then(({data, error}) => {
         if (error) {
           console.log('error', error)
-        } else {
+        } else if (data) {
           this.customer = data[0];
           this.loading = false;
+        } else {
+          console.log('No data')
         }
       })
     });
