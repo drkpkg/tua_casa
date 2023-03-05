@@ -16,7 +16,7 @@ import {NewClientComponent} from './new-client/new-client.component';
 import {NzMessageModule} from 'ng-zorro-antd/message';
 import {NzCardModule} from 'ng-zorro-antd/card';
 import {NzSelectModule} from "ng-zorro-antd/select";
-import {NzModalModule} from "ng-zorro-antd/modal";
+import {NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import {NzImageModule} from "ng-zorro-antd/image";
 
 
@@ -42,7 +42,11 @@ import {NzImageModule} from "ng-zorro-antd/image";
     NzSelectModule,
     NzModalModule,
     NzImageModule,
-    FormsModule
+    FormsModule,
+    NzModalModule
+  ],
+  providers: [
+    NzModalService
   ]
 })
 export class ClientModule {
