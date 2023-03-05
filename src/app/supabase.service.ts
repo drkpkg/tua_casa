@@ -86,8 +86,8 @@ export class SupabaseService {
     return {data, error};
   }
 
-  async getCustomerView() {
-    const {data, error} = await this.supabase.from('customer_view').select('*');
+  async getCustomerView(condition: any) {
+    const {data, error} = await this.supabase.from('customer_view').select('*').match(condition);
     return {data, error};
   }
 

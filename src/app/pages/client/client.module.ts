@@ -10,7 +10,7 @@ import {NzGridModule} from 'ng-zorro-antd/grid';
 import {NzButtonModule} from 'ng-zorro-antd/button';
 import {NzIconModule} from 'ng-zorro-antd/icon';
 import {NzFormModule} from 'ng-zorro-antd/form';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NzInputModule} from 'ng-zorro-antd/input';
 import {NewClientComponent} from './new-client/new-client.component';
 import {NzMessageModule} from 'ng-zorro-antd/message';
@@ -41,7 +41,8 @@ import {NzImageModule} from "ng-zorro-antd/image";
     NzCardModule,
     NzSelectModule,
     NzModalModule,
-    NzImageModule
+    NzImageModule,
+    FormsModule
   ]
 })
 export class ClientModule {

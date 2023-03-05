@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Customer from 'src/app/models/customer.model';
-import {SupabaseService} from 'src/app/supabase.service';
+import { SupabaseService } from 'src/app/supabase.service';
 
 @Component({
   selector: 'app-list-client',
@@ -12,6 +12,7 @@ export class ListClientComponent implements OnInit {
   dataSet: Customer[] = [];
   isVisible: boolean;
   customerId: number;
+  selectedType: string = "all";
 
   constructor(private supabaseService: SupabaseService) {
     this.isVisible = false;
@@ -44,7 +45,8 @@ export class ListClientComponent implements OnInit {
   }
 
   private loadData() {
-    this.supabaseService.getCustomerView().then(({data, error}) => {
+    let condition = this.selectedType === "all" ? {} : {customer_type: this.selectedType};
+    this.supabaseService.getCustomerView(condition).then(({data, error}) => {
       let dataValue: any = data;
       if (error) {
         console.log('error', error)
@@ -52,5 +54,9 @@ export class ListClientComponent implements OnInit {
         this.dataSet = Customer.fromJsonList(dataValue);
       }
     });
+  }
+
+  filterTable() {
+    this.loadData();
   }
 }

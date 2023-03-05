@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: 'clients/:id',
-    loadChildren: () => import('./pages/client-info/client-info.module').then(m => m.ClientInfoModule),
+    loadChildren: () => import('./pages/client/client-info/client-info.module').then(m => m.ClientInfoModule),
     pathMatch: "full"
   },
   {
