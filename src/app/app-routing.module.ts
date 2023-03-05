@@ -110,15 +110,20 @@ const routes: Routes = [
     pathMatch: "full",
   },
   {
+    path: 'properties/new',
+    loadChildren: () => import('./pages/property-new/property-new.module').then(m => m.PropertyNewModule),
+    pathMatch: "full",
+  },
+  {
     path: 'properties/:id',
     loadChildren: () => import('./pages/property-info/property-info.module').then(m => m.PropertyInfoModule),
     pathMatch: "full",
   },
-  {
-    path: 'properties/:id/info',
-    loadChildren: () => import('./pages/property-info/property-info.module').then(m => m.PropertyInfoModule),
-    pathMatch: "full",
-  }
+  // {
+  //   path: 'properties/:id/info',
+  //   loadChildren: () => import('./pages/property-info/property-info.module').then(m => m.PropertyInfoModule),
+  //   pathMatch: "full",
+  // }
 
 ];
 

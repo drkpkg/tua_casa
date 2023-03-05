@@ -20,7 +20,7 @@
     <nz-form-item>
       <nz-form-control>
         <nz-input-group>
-          <nz-select nzPlaceHolder="Propietario" formControlName="customer_id">
+          <nz-select nzPlaceHolder="Propietario" formControlName="customerId">
             <nz-option *ngFor="let customer of customers" [nzLabel]="customer.name" [nzValue]="customer.id"></nz-option>
           </nz-select>
         </nz-input-group>
@@ -28,7 +28,27 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <button nz-button nzType="primary" [disabled]="!formGroup.valid" htmlType="submit">Submit</button>
+        <nz-input-group>
+          <input nz-input placeholder="Tamaño de la propiedad" formControlName="propertySize" type="number" min="0"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <app-map
+            [showMarker]="false"
+            [markerGPS]="true"
+            [markerDraggable]="true"
+            [onMarkerChange]="onMapChange"
+            width="500px"
+            height="500px"></app-map>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" [disabled]="!formGroup.valid" type="submit">Submit</button>
       </nz-form-control>
     </nz-form-item>
   </form>
