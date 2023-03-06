@@ -11,8 +11,8 @@
       <th>Fecha de inicio</th>
       <th>Fecha de fin</th>
       <th>Monto</th>
-      <th>Acciones</th>
       <th>Dueño</th>
+      <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
@@ -21,22 +21,13 @@
       <td>{{data.start_date}}</td>
       <td>{{data.end_date}}</td>
       <td>{{data.amount}}</td>
-      <td>{{data.customer_id}}</td>
+      <td>{{data.property?.customer?.person?.name}} {{data.property?.customer?.person?.surname}} {{data.property?.customer?.person?.lastname}}</td>
       <td>
-        <a routerLink="/rents/{{data.id}}">Ver</a>
+        <a routerLink="/rents/{{data.id}}/info">Ver</a>
         <nz-divider nzType="vertical"></nz-divider>
-<!--        <a (click)="showModal(data.id)">Elmininar</a>-->
       </td>
     </tr>
     </tbody>
   </nz-table>
 </ng-container>
-<!--<ng-container>-->
-<!--  <nz-modal [(nzVisible)]="isVisible" nzTitle="Eliminar?" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">-->
-<!--    <ng-container *nzModalContent>-->
-<!--      <p>¿Está seguro que desea eliminar este cliente?</p>-->
-<!--      <p>Esta acción no se puede deshacer</p>-->
-<!--    </ng-container>-->
-<!--  </nz-modal>-->
-<!--</ng-container>-->
 

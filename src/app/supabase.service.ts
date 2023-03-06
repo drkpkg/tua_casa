@@ -220,7 +220,10 @@ export class SupabaseService {
   }
 
   async getRentals() {
-    const {data, error} = await this.supabase.from('rentals').select('*')
+    const {
+      data,
+      error
+    } = await this.supabase.from('rentals').select('id, start_date, end_date, amount, property: property_id (id, address, property_type, property_size, latitude, longitude, customer: customer_id (id, person: person_id (name, surname, lastname, identity_document))), created_at')
     return {data, error};
   }
 
@@ -310,6 +313,23 @@ export class SupabaseService {
 
   async getRentalsByCustomerId(id: number) {
     const {data, error} = await this.supabase.from('rentals').select('*').eq('customer_id', id)
+    return {data, error};
+  }
+
+  async getCustomerViewByCondition(condition: any[]) {
+    const {data, error} = await this.supabase.from('customer_view').select('*').in('customer_type', condition)
+    return {data, error};
+  }
+
+  async createRent(startDate: string, endDate: string, customerId: number, propertyId: number, amount: number) {
+    const {data, error} = await this.supabase.from('rentals').insert([
+      {
+        start_date: startDate,
+        end_date: endDate,
+        customer_id: customerId,
+        property_id: propertyId,
+        amount: amount,
+      }]);
     return {data, error};
   }
 }

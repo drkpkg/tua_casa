@@ -1,0 +1,55 @@
+<ng-container>
+  <form nz-form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <nz-date-picker nzPlaceHolder="Fecha de inicio" formControlName="startDate"></nz-date-picker>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <nz-date-picker nzPlaceHolder="Fecha de fin" formControlName="endDate"></nz-date-picker>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <nz-select nzPlaceHolder="Cliente" formControlName="customerId">
+            <nz-option *ngFor="let customer of customers"
+                       [nzLabel]="customer.name + ' ' + customer.surname + ' ' + customer.lastname"
+                       [nzValue]="customer.id"></nz-option>
+          </nz-select>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <nz-select nzPlaceHolder="Inmueble" formControlName="propertyId">
+            <nz-option *ngFor="let property of properties"
+                       [nzLabel]="property.customer?.person?.name + ' ' + property.customer?.person?.surname +' ' + property.customer?.person?.lastname + ' - ' + property.address"
+                       [nzValue]="property.id">
+            </nz-option>
+          </nz-select>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <input nz-input formControlName="amount" type="number" placeholder="Monto" min="0"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" [disabled]="!formGroup.valid" type="submit">Submit</button>
+        <button nz-button nzType="default" (click)="onCancel()">Cancelar</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-container>

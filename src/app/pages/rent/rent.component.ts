@@ -18,10 +18,8 @@ export class RentComponent implements OnInit {
     this.supabaseService.getRentals().then(({data, error}) => {
       if (error) {
         console.log(error);
-      } else if (data) {
-        this.dataSet = data;
       } else {
-        console.log("No data")
+        this.dataSet = data ?? [];
       }
     });
   }
