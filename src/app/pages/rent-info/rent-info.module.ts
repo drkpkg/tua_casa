@@ -8,6 +8,11 @@ import {NzCardModule} from "ng-zorro-antd/card";
 import {NzDividerModule} from "ng-zorro-antd/divider";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzIconModule} from "ng-zorro-antd/icon";
+import {NzModalModule} from "ng-zorro-antd/modal";
+import {ReactiveFormsModule} from "@angular/forms";
+import {NzFormModule} from "ng-zorro-antd/form";
+import {NzInputModule} from "ng-zorro-antd/input";
+import {NzSelectModule} from "ng-zorro-antd/select";
 
 
 @NgModule({
@@ -21,7 +26,12 @@ import {NzIconModule} from "ng-zorro-antd/icon";
     NzCardModule,
     NzDividerModule,
     NzButtonModule,
-    NzIconModule
+    NzIconModule,
+    NzModalModule,
+    ReactiveFormsModule,
+    NzFormModule,
+    NzInputModule,
+    NzSelectModule
   ]
 })
 export class RentInfoModule { }

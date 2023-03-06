@@ -30,3 +30,27 @@
     </nz-button-group>
   </nz-row>
 </ng-container>
+<ng-container>
+  <nz-modal [(nzVisible)]="showModal" nzTitle="Registrar pago" (nzOnCancel)="handleCancel()"
+            (nzOnOk)="handleOk()">
+    <div *nzModalContent>
+      <nz-form [formGroup]="formGroup">
+        <nz-form-item>
+          <nz-form-label nzFor="amount" nzRequired>Importe</nz-form-label>
+          <nz-form-control>
+            <input nz-input formControlName="amount" id="amount" placeholder="Importe">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzFor="date" nzRequired>Fecha</nz-form-label>
+          <nz-form-control>
+            <nz-select nzPlaceHolder="Tipo de pago" formControlName="paymentType">
+              <nz-option nzLabel="Efectivo" nzValue="0"></nz-option>
+              <nz-option nzLabel="Deposito" nzValue="1"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </nz-form>
+    </div>
+  </nz-modal>
+</ng-container>

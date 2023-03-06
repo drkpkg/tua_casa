@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {AuthChangeEvent, AuthSession, createClient, Session, SupabaseClient, User,} from '@supabase/supabase-js'
 import {environment} from 'src/enviroments/environment';
+import * as moment from "moment";
 
 export interface Profile {
   id?: string
@@ -345,6 +346,20 @@ export class SupabaseService {
       .from('rentals')
       .select('id, start_date, end_date, amount, property: property_id (id, address, property_type, property_size, latitude, longitude, customer: customer_id (id, person: person_id (name, surname, lastname, identity_document))), created_at')
       .eq('id', id)
+    return {data, error};
+  }
+
+  async registerPayment(amount: number, rentalId: number, customerId: number, paymentType: string) {
+    // timestamp
+    const {data, error} = await this.supabase.from('payments').insert([
+      {
+        amount: amount,
+        rental_id: rentalId,
+        customer_id: customerId,
+        payment_type: paymentType,
+        date: moment().format('YYYY-MM-DD HH:mm:ss'),
+      }
+    ]);
     return {data, error};
   }
 }
