@@ -267,7 +267,7 @@ export class SupabaseService {
     }
     const uuid = stringArr.join('-');
     const {data: storageData, error: storageError} = await this.supabase.storage.from('tuacasa-storage')
-      .upload(`${modelName}/${documentFile.name}`, documentFile, {
+      .upload(`${modelName}/${id}/${uuid}/${documentFile.name}`, documentFile, {
         cacheControl: '3600',
         upsert: false,
       });
@@ -286,9 +286,9 @@ export class SupabaseService {
     return {data, error};
   }
 
-  async deleteDocument(id: number, modelName: string, filename: string) {
+  async deleteDocument(id: number, modelId: number, modelName: string, uuid: string, filename: string) {
     const {data, error} = await this.supabase.from('documents').delete().eq('id', id);
-    await this.supabase.storage.from('tuacasa-storage').remove([`${modelName}/${filename}`]);
+    await this.supabase.storage.from('tuacasa-storage').remove([`${modelName}/${modelId}/${uuid}/${filename}`]);
     return {data, error};
   }
 
@@ -305,6 +305,11 @@ export class SupabaseService {
       latitude: latitude,
       longitude: longitude,
     }).eq('id', id);
+    return {data, error};
+  }
+
+  async getRentalsByCustomerId(id: number) {
+    const {data, error} = await this.supabase.from('rentals').select('*').eq('customer_id', id)
     return {data, error};
   }
 }

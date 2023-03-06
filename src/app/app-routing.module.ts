@@ -25,6 +25,11 @@ const routes: Routes = [
     pathMatch: "full"
   },
   {
+    path: 'clients/:id/documents',
+    loadChildren: () => import('./pages/client-document/client-document.module').then(m => m.ClientDocumentModule),
+    pathMatch: "full"
+  },
+  {
     path: 'employees',
     loadChildren: () => import('./pages/employee/employee.module').then(m => m.EmployeeModule),
     pathMatch: "full"

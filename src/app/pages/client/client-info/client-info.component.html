@@ -13,28 +13,57 @@
     </nz-card>
     <nz-button-group>
       <button nz-button nzType="primary" (click)="back()">Regresar</button>
+      <button nz-button nzType="primary" (click)="documents(customer?.id)">Documentos</button>
     </nz-button-group>
   </nz-row>
 </ng-container>
+<nz-divider nzType="horizontal"></nz-divider>
 <ng-container>
-  <nz-table #basicTable [nzData]="dataSetProperties" *ngIf="customer?.customer_type == 0">
+  <nz-table #basicTable [nzData]="dataSetProperties"
+            *ngIf="customer?.customer_type == 0 || customer?.customer_type == 2">
     <thead>
-      <tr>
-        <th>Dirección</th>
-        <th>Tipo de propiedad</th>
-        <th>Tamaño de propiedad</th>
-        <th>Acciones</th>
-      </tr>
+    <tr>
+      <th>Dirección</th>
+      <th>Tipo de propiedad</th>
+      <th>Tamaño de propiedad</th>
+      <th>Acciones</th>
+    </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of basicTable.data">
-        <td>{{data.address}}</td>
-        <td>{{data.property_type}}</td>
-        <td>{{data.property_size}}</td>
-        <td>
-          <button nz-button nzType="primary" (click)="viewProperty(data.id)">Ver</button>
-        </td>
-      </tr>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.address}}</td>
+      <td>{{data.property_type}}</td>
+      <td>{{data.property_size}}</td>
+      <td>
+        <button nz-button nzType="primary" (click)="viewProperty(data.id)">Ver</button>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</ng-container>
+<nz-divider nzType="horizontal"></nz-divider>
+<ng-container>
+  <nz-table #basicTable [nzData]="dataSetRentals"
+            *ngIf="customer?.customer_type == 1 || customer?.customer_type == 2">
+    <thead>
+    <tr>
+      <th>Fecha de inicio</th>
+      <th>Fecha de fin</th>
+      <th>Monto mensual</th>
+      <th>Propiedad</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.start_date}}</td>
+      <td>{{data.end_date}}</td>
+      <td>{{data.amount}}</td>
+      <td>{{data.property?.address}}</td>
+      <td>
+        <button nz-button nzType="primary" (click)="viewRental(data.id)">Ver</button>
+      </td>
+    </tr>
     </tbody>
   </nz-table>
 </ng-container>

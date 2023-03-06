@@ -5,11 +5,11 @@ import {environment} from "../../../enviroments/environment";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
-  selector: 'app-property-document',
-  templateUrl: './property-document.component.html',
-  styleUrls: ['./property-document.component.css']
+  selector: 'app-client-document',
+  templateUrl: './client-document.component.html',
+  styleUrls: ['./client-document.component.css']
 })
-export class PropertyDocumentComponent implements OnInit {
+export class ClientDocumentComponent implements OnInit {
   id: number;
   documents: any[];
 
@@ -28,7 +28,7 @@ export class PropertyDocumentComponent implements OnInit {
   uploadFile(event: any) {
     // foreach is not a function
     for (const file of event.target.files) {
-      this.supabaseService.createDocument(this.id, 'properties', file).then(({data, error}) => {
+      this.supabaseService.createDocument(this.id, 'clients', file).then(({data, error}) => {
         if (error) {
           console.log(error);
         } else {
@@ -40,7 +40,7 @@ export class PropertyDocumentComponent implements OnInit {
 
   loadDocuments() {
     this.documents = [];
-    this.supabaseService.getPropertyDocuments(this.id, 'properties').then(({data, error}) => {
+    this.supabaseService.getPropertyDocuments(this.id, 'clients').then(({data, error}) => {
       if (error) {
         console.log(error);
       } else {
@@ -68,7 +68,7 @@ export class PropertyDocumentComponent implements OnInit {
   }
 
   deleteDocument(id: number, modelId: number, filename: string, uuid: string) {
-    this.supabaseService.deleteDocument(id, modelId,'properties', uuid, filename).then(({data, error}) => {
+    this.supabaseService.deleteDocument(id, modelId, 'clients', uuid, filename).then(({data, error}) => {
       if (error) {
         console.log(error);
       } else {
@@ -78,6 +78,6 @@ export class PropertyDocumentComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['/properties', this.id]);
+    this.router.navigate(['/clients', this.id]);
   }
 }

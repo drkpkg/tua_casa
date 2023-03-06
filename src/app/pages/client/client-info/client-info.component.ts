@@ -13,11 +13,13 @@ export class ClientInfoComponent implements OnInit {
   loading: boolean;
   customer: any;
   dataSetProperties: any[];
+  dataSetRentals: any[];
 
   constructor(private supabaseService: SupabaseService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.id = 0;
     this.loading = true;
     this.dataSetProperties = [];
+    this.dataSetRentals = [];
   }
 
   ngOnInit(): void {
@@ -28,6 +30,7 @@ export class ClientInfoComponent implements OnInit {
           console.log('error', error)
         } else {
           this.customer = data ? data[0] : {};
+          console.log('customer', this.customer);
           this.loading = false;
         }
       });
@@ -36,6 +39,13 @@ export class ClientInfoComponent implements OnInit {
           console.log('error', error)
         } else {
           this.dataSetProperties = data ?? [];
+        }
+      });
+      this.supabaseService.getRentalsByCustomerId(this.id).then(({data, error}) => {
+        if (error) {
+          console.log('error', error)
+        } else {
+          this.dataSetRentals = data ?? [];
         }
       });
     });
@@ -47,5 +57,14 @@ export class ClientInfoComponent implements OnInit {
 
   viewProperty(id: number) {
     this.router.navigate(['/properties', id]);
+  }
+
+  documents(id: number) {
+    this.router.navigate(['/clients', id, 'documents']);
+  }
+
+  viewRental(id: number) {
+    // open in new tab
+    this.router.navigate(['/rentals', id]);
   }
 }
