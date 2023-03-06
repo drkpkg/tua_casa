@@ -54,6 +54,23 @@ export class PropertyNewComponent implements OnInit {
   }
 
   onSubmit() {
+    this.supabaseService.createProperty(
+      this.formGroup.get('address')?.value,
+      this.formGroup.get('propertyType')?.value,
+      this.formGroup.get('propertySize')?.value,
+      this.formGroup.get('customerId')?.value,
+      this.formGroup.get('latitude')?.value,
+      this.formGroup.get('longitude')?.value,
+    ).then(({data, error}) => {
+      if (error) {
+        console.log(error);
+      } else {
+        this.router.navigate(['/properties']);
+      }
+    });
+  }
 
+  onCancel() {
+    this.router.navigate(['/properties']);
   }
 }

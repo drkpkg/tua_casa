@@ -119,11 +119,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/property-info/property-info.module').then(m => m.PropertyInfoModule),
     pathMatch: "full",
   },
-  // {
-  //   path: 'properties/:id/info',
-  //   loadChildren: () => import('./pages/property-info/property-info.module').then(m => m.PropertyInfoModule),
-  //   pathMatch: "full",
-  // }
+  {
+    path: 'properties/:id/documents',
+    loadChildren: () => import('./pages/property-document/property-document.module').then(m => m.PropertyDocumentModule),
+  }
 
 ];
 

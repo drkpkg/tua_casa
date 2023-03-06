@@ -1,0 +1,24 @@
+<ng-container>
+  <nz-button-group>
+    <input type="file" nz-button (change)="uploadFile($event)" [multiple]="true">
+  </nz-button-group>
+  <nz-divider [nzDashed] nzType="horizontal"></nz-divider>
+  <ng-container>
+    <!-- List of cards -->
+    <nz-card *ngFor="let document of documents" [nzTitle]="document.description">
+      <ng-container *ngIf="document.type == 'image/jpeg'">
+        <img [src]="document.url" style="width: 200px" alt="image">
+      </ng-container>
+      <ng-container *ngIf="document.type == 'image/png'">
+        <img [src]="document.url" style="width: 200px" alt="image">
+      </ng-container>
+      <ng-container *ngIf="document.type == 'application/pdf'">
+        <pdf-viewer [src]="document.url" style="display: block; width: 100%; height: 300px;"></pdf-viewer>
+      </ng-container>
+      <nz-divider [nzDashed] nzType="horizontal"></nz-divider>
+      <nz-button-group>
+        <button nz-button (click)="deleteDocument(document.id, document.filename)">Delete</button>
+      </nz-button-group>
+    </nz-card>
+  </ng-container>
+</ng-container>

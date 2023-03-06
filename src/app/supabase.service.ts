@@ -225,7 +225,70 @@ export class SupabaseService {
   }
 
   async getProperties() {
-    const {data, error} = await this.supabase.from('properties').select('*')
+    const {
+      data,
+      error
+    } = await this.supabase.from('properties').select('id, address, property_type, property_size, latitude, longitude, customer: customer_id (id, person: person_id (name, surname, lastname, identity_document))')
+    return {data, error};
+  }
+
+
+  async createProperty(address: string, propertyType: string, propertySize: string, customerId: string, latitude: number, longitude: number) {
+    const {data, error} = await this.supabase.from('properties').insert([
+      {
+        address: address,
+        property_type: propertyType,
+        property_size: propertySize,
+        customer_id: customerId,
+        latitude: latitude,
+        longitude: longitude,
+      }]);
+    return {data, error};
+  }
+
+  async getProperty(id: number) {
+    const {data, error} = await this.supabase.from('properties')
+      .select('id, address, property_type, property_size, latitude, longitude, customer: customer_id (id, person: person_id (name, surname, lastname, identity_document))')
+      .eq('id', id)
+    return {data, error};
+  }
+
+  async getPropertyDocuments(id: number, modelName: string) {
+    const {data, error} = await this.supabase.from('documents')
+      .select('*').eq('model_id', id).eq('model_name', modelName)
+    return {data, error};
+  }
+
+  async createDocument(id: number, modelName: string, documentFile: File) {
+    const stringArr = [];
+    for (let i = 0; i < 8; i++) {
+      const S4 = (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+      stringArr.push(S4);
+    }
+    const uuid = stringArr.join('-');
+    const {data: storageData, error: storageError} = await this.supabase.storage.from('tuacasa-storage')
+      .upload(`${modelName}/${documentFile.name}`, documentFile, {
+        cacheControl: '3600',
+        upsert: false,
+      });
+    if (storageError) {
+      return {data: null, error: storageError};
+    }
+    // create document, storage returns the url
+    const {data, error} = await this.supabase.from('documents').insert([
+      {
+        model_id: id,
+        model_name: modelName,
+        url: storageData?.path,
+        uuid: uuid,
+        filename: documentFile.name,
+      }]);
+    return {data, error};
+  }
+
+  async deleteDocument(id: number, modelName: string, filename: string) {
+    const {data, error} = await this.supabase.from('documents').delete().eq('id', id);
+    await this.supabase.storage.from('tuacasa-storage').remove([`${modelName}/${filename}`]);
     return {data, error};
   }
 }

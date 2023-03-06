@@ -10,8 +10,8 @@ export class MapComponent implements OnInit, AfterViewInit {
   @Input() mapId: string;
   @Input() showMarker: boolean;
   @Input() markerText: string;
-  @Input() markerLat: number;
-  @Input() markerLng: number;
+  @Input() markerLat: any;
+  @Input() markerLng: any;
   @Input() markerList: any;
   @Input() width: string;
   @Input() height: string;
@@ -38,10 +38,11 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-
+    console.log('ngOnInit');
   }
 
   ngAfterViewInit(): void {
+    console.log('ngAfterViewInit');
     this.initMap();
   }
 

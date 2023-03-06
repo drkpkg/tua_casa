@@ -32,10 +32,9 @@ export class PropertyComponent implements OnInit {
     this.supabaseService.getProperties().then(({data, error}) => {
       if (error) {
         console.log(error);
-      } else if (data) {
-        this.dataSet = data;
       } else {
-        console.log("No data")
+        console.log(data);
+        this.dataSet = data ?? [];
       }
     });
   }

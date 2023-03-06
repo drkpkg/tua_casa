@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {PropertyInfoComponent} from "./property-info.component";
+import {PropertyDocumentComponent} from "./property-document.component";
 
 const routes: Routes = [
   {
     path: '',
-    component: PropertyInfoComponent
+    component: PropertyDocumentComponent
   }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PropertyInfoRoutingModule { }
+export class PropertyDocumentRoutingModule { }
