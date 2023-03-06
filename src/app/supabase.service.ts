@@ -332,4 +332,19 @@ export class SupabaseService {
       }]);
     return {data, error};
   }
+
+  async getRent(id: number) {
+    /*
+    start_date
+    end_date
+    amount
+    property_id
+    customer_id
+    * */
+    const {data, error} = await this.supabase
+      .from('rentals')
+      .select('id, start_date, end_date, amount, property: property_id (id, address, property_type, property_size, latitude, longitude, customer: customer_id (id, person: person_id (name, surname, lastname, identity_document))), created_at')
+      .eq('id', id)
+    return {data, error};
+  }
 }

@@ -41,7 +41,6 @@ export class RentNewComponent implements OnInit {
         console.log(error);
       } else {
         this.properties = data ?? [];
-        console.log(this.properties);
       }
     });
   }
