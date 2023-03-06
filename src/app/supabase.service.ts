@@ -291,4 +291,20 @@ export class SupabaseService {
     await this.supabase.storage.from('tuacasa-storage').remove([`${modelName}/${filename}`]);
     return {data, error};
   }
+
+  async getPropertiesByCustomerId(id: number) {
+    const {data, error} = await this.supabase.from('properties').select('*').eq('customer_id', id)
+    return {data, error};
+  }
+
+  async updateProperty(id: number, address: string, propertyType: string, propertySize: string, latitude: number, longitude: number) {
+    const {data, error} = await this.supabase.from('properties').update({
+      address: address,
+      property_type: propertyType,
+      property_size: propertySize,
+      latitude: latitude,
+      longitude: longitude,
+    }).eq('id', id);
+    return {data, error};
+  }
 }

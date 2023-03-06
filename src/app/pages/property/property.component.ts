@@ -33,7 +33,6 @@ export class PropertyComponent implements OnInit {
       if (error) {
         console.log(error);
       } else {
-        console.log(data);
         this.dataSet = data ?? [];
       }
     });

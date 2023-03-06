@@ -33,12 +33,10 @@
       <nz-divider nzType="horizontal"></nz-divider>
       <nz-card-meta nzTitle="Cliente"
                     nzDescription="{{property?.customer?.person?.name}} {{property?.customer?.person?.surname}} {{property?.customer?.person?.lastname}}"></nz-card-meta>
-<!--      <app-map width="500px"-->
-<!--               height="500px"-->
-<!--               [markerLat]="property?.latitude"-->
-<!--               [markerLng]="property?.longitude"-->
-<!--               [showMarker]="true"></app-map>-->
-
+      <nz-divider nzType="horizontal"></nz-divider>
+      <nz-card-meta nzTitle="Ubicación"
+                    nzDescription="Latitud: {{property?.latitude}} Longitud: {{property?.longitude}}">
+      </nz-card-meta>
     </nz-card>
     <nz-button-group>
       <button nz-button nzType="primary" (click)="back()">Regresar</button>

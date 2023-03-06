@@ -120,6 +120,10 @@ const routes: Routes = [
     pathMatch: "full",
   },
   {
+    path: 'properties/:id/edit',
+    loadChildren: () => import('./pages/property-edit/property-edit.module').then(m => m.PropertyEditModule),
+  },
+  {
     path: 'properties/:id/documents',
     loadChildren: () => import('./pages/property-document/property-document.module').then(m => m.PropertyDocumentModule),
   }

@@ -1,1 +1,47 @@
-<p>property-edit works!</p>
+<ng-container>
+  <form nz-form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <input nz-input placeholder="Dirección" formControlName="address"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <nz-select nzPlaceHolder="Tipo de propiedad" formControlName="propertyType">
+            <nz-option nzLabel="Casa" nzValue="house"></nz-option>
+            <nz-option nzLabel="Departamento" nzValue="apartment"></nz-option>
+          </nz-select>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <input nz-input placeholder="Tamaño de la propiedad" formControlName="propertySize" type="number" min="0"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <app-map
+            [showMarker]="false"
+            [markerGPS]="true"
+            [markerDraggable]="true"
+            [onMarkerChange]="onMapChange"
+            width="500px"
+            height="500px"></app-map>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" [disabled]="!formGroup.valid" type="submit">Submit</button>
+        <button nz-button nzType="default" (click)="onCancel()">Cancelar</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-container>

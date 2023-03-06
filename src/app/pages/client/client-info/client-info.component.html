@@ -16,3 +16,26 @@
     </nz-button-group>
   </nz-row>
 </ng-container>
+<ng-container>
+  <nz-table #basicTable [nzData]="dataSetProperties" *ngIf="customer?.customer_type == 0">
+    <thead>
+      <tr>
+        <th>Dirección</th>
+        <th>Tipo de propiedad</th>
+        <th>Tamaño de propiedad</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.address}}</td>
+        <td>{{data.property_type}}</td>
+        <td>{{data.property_size}}</td>
+        <td>
+          <button nz-button nzType="primary" (click)="viewProperty(data.id)">Ver</button>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</ng-container>
+

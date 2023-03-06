@@ -12,10 +12,12 @@ export class ClientInfoComponent implements OnInit {
   id: number;
   loading: boolean;
   customer: any;
+  dataSetProperties: any[];
 
   constructor(private supabaseService: SupabaseService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.id = 0;
     this.loading = true;
+    this.dataSetProperties = [];
   }
 
   ngOnInit(): void {
@@ -24,17 +26,26 @@ export class ClientInfoComponent implements OnInit {
       this.supabaseService.getCustomerById(this.id).then(({data, error}) => {
         if (error) {
           console.log('error', error)
-        } else if (data) {
-          this.customer = data[0];
-          this.loading = false;
         } else {
-          console.log('No data')
+          this.customer = data ? data[0] : {};
+          this.loading = false;
         }
-      })
+      });
+      this.supabaseService.getPropertiesByCustomerId(this.id).then(({data, error}) => {
+        if (error) {
+          console.log('error', error)
+        } else {
+          this.dataSetProperties = data ?? [];
+        }
+      });
     });
   }
 
   back() {
     this.router.navigate(['/clients']);
+  }
+
+  viewProperty(id: number) {
+    this.router.navigate(['/properties', id]);
   }
 }

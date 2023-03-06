@@ -13,10 +13,12 @@ export class ListClientComponent implements OnInit {
   isVisible: boolean;
   customerId: number;
   selectedType: string = "all";
+  dataSetProperties: any[];
 
   constructor(private supabaseService: SupabaseService) {
     this.isVisible = false;
     this.customerId = 0;
+    this.dataSetProperties = [];
   }
 
   ngOnInit(): void {

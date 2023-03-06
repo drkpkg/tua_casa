@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {SupabaseService} from "../../supabase.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
@@ -7,7 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './property-info.component.html',
   styleUrls: ['./property-info.component.css']
 })
-export class PropertyInfoComponent implements OnInit{
+export class PropertyInfoComponent implements OnInit, AfterViewInit {
   loading: boolean;
   property: any;
 
@@ -16,15 +16,7 @@ export class PropertyInfoComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params:any) => {
-      this.supabaseService.getProperty(params.id).then(({data, error}) => {
-        if (error) {
-          console.log(error);
-        } else {
-          this.property = data ? data[0] : null;
-        }
-      });
-    });
+
   }
 
   back() {
@@ -37,5 +29,17 @@ export class PropertyInfoComponent implements OnInit{
 
   documents(id: string) {
     this.router.navigate([`/properties/${id}/documents`]);
+  }
+
+  ngAfterViewInit(): void {
+    this.route.params.subscribe((params:any) => {
+      this.supabaseService.getProperty(params.id).then(({data, error}) => {
+        if (error) {
+          console.log(error);
+        } else {
+          this.property = data ? data[0] : null;
+        }
+      });
+    });
   }
 }

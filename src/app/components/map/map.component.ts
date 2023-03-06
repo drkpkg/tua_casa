@@ -10,9 +10,9 @@ export class MapComponent implements OnInit, AfterViewInit {
   @Input() mapId: string;
   @Input() showMarker: boolean;
   @Input() markerText: string;
-  @Input() markerLat: any;
-  @Input() markerLng: any;
-  @Input() markerList: any;
+  @Input() markerLat: number;
+  @Input() markerLng: number;
+  @Input() markerList: any[];
   @Input() width: string;
   @Input() height: string;
   @Input() markerGPS: boolean;
@@ -34,15 +34,15 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.height = '300px';
     this.markerGPS = false;
     this.markerDraggable = false;
-    this.onMarkerChange = (lat: number, lng: number) => {}
+    this.onMarkerChange = (lat: number, lng: number) => {
+    }
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit');
+
   }
 
   ngAfterViewInit(): void {
-    console.log('ngAfterViewInit');
     this.initMap();
   }
 
