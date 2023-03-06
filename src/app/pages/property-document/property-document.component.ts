@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {SupabaseService} from "../../supabase.service";
 import {environment} from "../../../enviroments/environment";
 import {HttpClient} from "@angular/common/http";
@@ -13,13 +13,13 @@ export class PropertyDocumentComponent implements OnInit {
   id: number;
   documents: any[];
 
-  constructor(private router: ActivatedRoute, private supabaseService: SupabaseService, private httpClient: HttpClient) {
+  constructor(private activatedRoute: ActivatedRoute, private supabaseService: SupabaseService, private httpClient: HttpClient, private router: Router) {
     this.documents = [];
     this.id = 0;
   }
 
   ngOnInit(): void {
-    this.router.params.subscribe((params: any) => {
+    this.activatedRoute.params.subscribe((params: any) => {
       this.id = params.id;
       this.loadDocuments();
     });
@@ -75,5 +75,9 @@ export class PropertyDocumentComponent implements OnInit {
         this.loadDocuments();
       }
     });
+  }
+
+  back() {
+    this.router.navigate(['/properties', this.id]);
   }
 }

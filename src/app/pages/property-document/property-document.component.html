@@ -1,6 +1,7 @@
 <ng-container>
   <nz-button-group>
     <input type="file" nz-button (change)="uploadFile($event)" [multiple]="true">
+    <button nz-button (click)="back()">Volver</button>
   </nz-button-group>
   <nz-divider [nzDashed] nzType="horizontal"></nz-divider>
   <ng-container>
