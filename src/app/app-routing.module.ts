@@ -25,8 +25,18 @@ const routes: Routes = [
     pathMatch: "full"
   },
   {
-    path: 'clients/:id/documents',
-    loadChildren: () => import('./pages/client-document/client-document.module').then(m => m.ClientDocumentModule),
+    path: 'clients/:id/vehicles',
+    loadChildren: () => import('./pages/vehicle/vehicle.module').then(m => m.VehicleModule),
+    pathMatch: "full"
+  },
+  {
+    path: 'clients/:id/vehicles/new',
+    loadChildren: () => import('./pages/vehicle/vehicle.module').then(m => m.VehicleModule),
+    pathMatch: "full"
+  },
+  {
+    path: 'clients/:id/vehicles/:vehicle_id/info',
+    loadChildren: () => import('./pages/vehicle/vehicle.module').then(m => m.VehicleModule),
     pathMatch: "full"
   },
   {
