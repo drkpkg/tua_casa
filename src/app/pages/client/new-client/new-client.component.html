@@ -1,70 +1,62 @@
 <nz-card [nzBordered]="false" [nzHoverable]="true">
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" nz-form [nzLayout]="'horizontal'">
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="user">
-            <input nz-input placeholder="Nombre" formControlName="name" type="text" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="user">
-            <input nz-input placeholder="Apellido paterno" formControlName="surname" type="text" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="user">
-            <input nz-input placeholder="Apellido materno" formControlName="lastname" type="text" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="audit">
-            <input nz-input placeholder="Documento de identidad" formControlName="identity_document" type="text" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="mail">
-            <input nz-input placeholder="Correo electronico" formControlName="email" type="email" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="phone">
-            <input nz-input placeholder="Telefono" formControlName="phone" type="text" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group>
-            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Tipo de cliente" formControlName="customer_type">
-              <nz-option nzLabel="Dueño" nzValue="0"></nz-option>
-              <nz-option nzLabel="Arrendatario" nzValue="1"></nz-option>
-              <nz-option nzLabel="Dueño e Arrendatario" nzValue="2"></nz-option>
-            </nz-select>
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-<!--      <nz-form-item>-->
-<!--        <nz-form-control>-->
-<!--          <nz-input-group>-->
-<!--            <img nz-image width="200px" height="200px"  [nzFallback]="fallback"/>-->
-<!--            <input nz-input type="file" (change)="onFileChange($event)" />-->
-<!--          </nz-input-group>-->
-<!--        </nz-form-control>-->
-<!--      </nz-form-item>-->
-      <nz-form-item>
-        <nz-form-control>
-          <button nz-button nzType="primary" [disabled]="!formGroup.valid">Crear cliente</button>
-        </nz-form-control>
-      </nz-form-item>
-    </form>
-  </nz-card>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" nz-form [nzLayout]="'horizontal'">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group nzPrefixIcon="user">
+          <input nz-input placeholder="Nombre" formControlName="name" type="text"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group nzPrefixIcon="user">
+          <input nz-input placeholder="Apellido paterno" formControlName="surname" type="text"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group nzPrefixIcon="user">
+          <input nz-input placeholder="Apellido materno" formControlName="lastname" type="text"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group nzPrefixIcon="audit">
+          <input nz-input placeholder="Documento de identidad" formControlName="identity_document" type="text"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group nzPrefixIcon="mail">
+          <input nz-input placeholder="Correo electronico" formControlName="email" type="email"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group nzPrefixIcon="phone">
+          <input nz-input placeholder="Telefono" formControlName="phone" type="text"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Tipo de cliente" formControlName="customer_type">
+            <nz-option nzLabel="Visitante" nzValue="visitor"></nz-option>
+            <nz-option nzLabel="Abonado" nzValue="subscriber"></nz-option>
+            <nz-option nzLabel="Abonado vip" nzValue="subscriber_vip"></nz-option>
+          </nz-select>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" [disabled]="!formGroup.valid">Crear cliente</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-card>

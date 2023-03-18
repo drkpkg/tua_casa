@@ -1,9 +1,9 @@
 <ng-container>
    <nz-select class="nz-select--large" [(ngModel)]="selectedType" (ngModelChange)="filterTable()">
       <nz-option nzLabel="Todos" nzValue="all"></nz-option>
-      <nz-option nzLabel="Dueños" nzValue="0"></nz-option>
-      <nz-option nzLabel="Arrendatarios" nzValue="1"></nz-option>
-      <nz-option nzLabel="Dueños e Arrendatarios" nzValue="2"></nz-option>
+      <nz-option nzLabel="Visitante" nzValue="visitor"></nz-option>
+      <nz-option nzLabel="Abonado" nzValue="subscriber"></nz-option>
+      <nz-option nzLabel="Abonado vip" nzValue="subscriber_vip"></nz-option>
     </nz-select>
     <button nz-button nzType="primary" (click)="filterTable()">Filtrar</button>
   <nz-table #basicTable [nzData]="dataSet">
