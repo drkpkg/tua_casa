@@ -31,13 +31,27 @@ const routes: Routes = [
   },
   {
     path: 'clients/:id/vehicles/new',
-    loadChildren: () => import('./pages/vehicle/vehicle.module').then(m => m.VehicleModule),
+    loadChildren: () => import('./pages/vehicle-new/vehicle-new.module').then(m => m.VehicleNewModule),
     pathMatch: "full"
   },
   {
     path: 'clients/:id/vehicles/:vehicle_id/info',
-    loadChildren: () => import('./pages/vehicle/vehicle.module').then(m => m.VehicleModule),
+    loadChildren: () => import('./pages/vehicle-info/vehicle-info.module').then(m => m.VehicleInfoModule),
     pathMatch: "full"
+  },
+  {
+    path: 'clients/:id/vehicles/:vehicle_id/contracts',
+    loadChildren: () => import('./pages/contract/contract.module').then(m => m.ContractModule),
+    pathMatch: "full"
+  },
+  {
+    path: 'clients/:id/vehicles/:vehicle_id/contracts/new',
+    loadChildren: () => import('./pages/new-contract/new-contract.module').then(m => m.NewContractModule),
+    pathMatch: "full"
+  },
+  {
+    path: 'clients/:id/vehicles/:vehicle_id/contracts/:contract_id',
+    loadChildren: () => import('./pages/info-contract/info-contract.module').then(m => m.InfoContractModule),
   },
   {
     path: 'employees',
@@ -47,26 +61,6 @@ const routes: Routes = [
   {
     path: 'employees/:id',
     loadChildren: () => import('./pages/employee/employee.module').then(m => m.EmployeeModule),
-    pathMatch: "full"
-  },
-  {
-    path: 'staff',
-    loadChildren: () => import('./pages/staff/staff.module').then(m => m.StaffModule),
-    pathMatch: "full"
-  },
-  {
-    path: 'staff/:id',
-    loadChildren: () => import('./pages/staff/staff.module').then(m => m.StaffModule),
-    pathMatch: "full"
-  },
-  {
-    path: 'receptionist',
-    loadChildren: () => import('./pages/receptionist/receptionist.module').then(m => m.ReceptionistModule),
-    pathMatch: "full"
-  },
-  {
-    path: 'receptionist/:id',
-    loadChildren: () => import('./pages/receptionist/receptionist.module').then(m => m.ReceptionistModule),
     pathMatch: "full"
   },
   {

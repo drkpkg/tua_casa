@@ -12,14 +12,14 @@ export class ClientInfoComponent implements OnInit {
   id: number;
   loading: boolean;
   customer: any;
-  dataSetProperties: any[];
-  dataSetRentals: any[];
+  dataSetContracts: any[];
+  dataSetVehicles: any[];
 
   constructor(private supabaseService: SupabaseService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.id = 0;
     this.loading = true;
-    this.dataSetProperties = [];
-    this.dataSetRentals = [];
+    this.dataSetContracts = [];
+    this.dataSetVehicles = [];
   }
 
   ngOnInit(): void {
@@ -34,18 +34,19 @@ export class ClientInfoComponent implements OnInit {
           this.loading = false;
         }
       });
-      this.supabaseService.getPropertiesByCustomerId(this.id).then(({data, error}) => {
+      this.supabaseService.getVehiclesByCustomerId(this.id).then(({data, error}) => {
         if (error) {
           console.log('error', error)
         } else {
-          this.dataSetProperties = data ?? [];
+          this.dataSetVehicles = data ? data : [];
         }
       });
-      this.supabaseService.getRentalsByCustomerId(this.id).then(({data, error}) => {
+      this.supabaseService.getContractsByCustomerId(this.id).then(({data, error}) => {
         if (error) {
           console.log('error', error)
         } else {
-          this.dataSetRentals = data ?? [];
+          console.log('data', data);
+          this.dataSetContracts = data ? data : [];
         }
       });
     });
@@ -63,8 +64,15 @@ export class ClientInfoComponent implements OnInit {
     this.router.navigate(['/clients', id, 'documents']);
   }
 
-  viewRental(id: number) {
-    // open in new tab
-    this.router.navigate(['/rentals', id]);
+  viewContract(id: number) {
+    this.router.navigate(['/contracts', id]);
+  }
+
+  addVehicle() {
+    this.router.navigate([`/clients/${this.id}/vehicles/new`]);
+  }
+
+  addContract() {
+    this.router.navigate([`/clients/${this.id}/contracts/new`]);
   }
 }

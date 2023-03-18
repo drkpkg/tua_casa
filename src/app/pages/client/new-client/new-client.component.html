@@ -44,17 +44,6 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <nz-input-group>
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Tipo de cliente" formControlName="customer_type">
-            <nz-option nzLabel="Visitante" nzValue="visitor"></nz-option>
-            <nz-option nzLabel="Abonado" nzValue="subscriber"></nz-option>
-            <nz-option nzLabel="Abonado vip" nzValue="subscriber_vip"></nz-option>
-          </nz-select>
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-control>
         <button nz-button nzType="primary" [disabled]="!formGroup.valid">Crear cliente</button>
       </nz-form-control>
     </nz-form-item>

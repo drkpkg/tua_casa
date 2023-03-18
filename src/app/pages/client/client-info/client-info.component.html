@@ -13,27 +13,30 @@
     </nz-card>
     <nz-button-group>
       <button nz-button nzType="primary" (click)="back()">Regresar</button>
-      <button nz-button nzType="primary" (click)="documents(customer?.id)">Documentos</button>
     </nz-button-group>
   </nz-row>
 </ng-container>
 <nz-divider nzType="horizontal"></nz-divider>
 <ng-container>
-  <nz-table #basicTable [nzData]="dataSetProperties"
-            *ngIf="customer?.customer_type == 0 || customer?.customer_type == 2">
+  <nz-button-group>
+    <button nz-button nzType="primary" (click)="addVehicle()">Agregar vehículo</button>
+  </nz-button-group>
+  <nz-table #basicTable [nzData]="dataSetVehicles">
     <thead>
     <tr>
-      <th>Dirección</th>
-      <th>Tipo de propiedad</th>
-      <th>Tamaño de propiedad</th>
+      <th>Nombre</th>
+      <th>Placa</th>
+      <th>Color</th>
+      <th>Marca</th>
       <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let data of basicTable.data">
-      <td>{{data.address}}</td>
-      <td>{{data.property_type}}</td>
-      <td>{{data.property_size}}</td>
+      <td>{{data?.description}}</td>
+      <td>{{data?.plate}}</td>
+      <td>{{data?.color}}</td>
+      <td>{{data?.brand?.name}}</td>
       <td>
         <button nz-button nzType="primary" (click)="viewProperty(data.id)">Ver</button>
       </td>
@@ -43,25 +46,30 @@
 </ng-container>
 <nz-divider nzType="horizontal"></nz-divider>
 <ng-container>
-  <nz-table #basicTable [nzData]="dataSetRentals"
-            *ngIf="customer?.customer_type == 1 || customer?.customer_type == 2">
+  <nz-table #basicTable [nzData]="dataSetContracts">
     <thead>
     <tr>
+      <th>Contrato</th>
       <th>Fecha de inicio</th>
       <th>Fecha de fin</th>
-      <th>Monto mensual</th>
-      <th>Propiedad</th>
+      <th>Vehículo</th>
+      <th>Monto</th>
+      <th>Tipo de contrato</th>
+      <th>Empleado</th>
       <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let data of basicTable.data">
-      <td>{{data.start_date}}</td>
-      <td>{{data.end_date}}</td>
-      <td>{{data.amount}}</td>
-      <td>{{data.property?.address}}</td>
+      <td>{{data?.id}}</td>
+      <td>{{data?.start_date}}</td>
+      <td>{{data?.end_date}}</td>
+      <td>{{data?.vehicle?.description}}</td>
+      <td>{{data?.amount_total}}</td>
+      <td>{{data?.contract_type}}</td>
+      <td>{{data?.employee?.name}}</td>
       <td>
-        <button nz-button nzType="primary" (click)="viewRental(data.id)">Ver</button>
+        <button nz-button nzType="primary" (click)="viewContract(data.id)">Ver</button>
       </td>
     </tr>
     </tbody>

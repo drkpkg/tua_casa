@@ -23,8 +23,7 @@ export class NewClientComponent implements OnInit {
         lastname: new FormControl('', [Validators.required]),
         identity_document: new FormControl('', [Validators.required]),
         email: new FormControl('', [Validators.required, Validators.email]),
-        phone: new FormControl('', [Validators.required]),
-        customer_type: new FormControl('0', [Validators.required]),
+        phone: new FormControl('', [Validators.required])
       }
     );
     this.fallback =
@@ -42,8 +41,8 @@ export class NewClientComponent implements OnInit {
       this.formGroup.value.lastname,
       this.formGroup.value.identity_document,
       this.formGroup.value.phone,
-      this.formGroup.value.email,
-      this.formGroup.value.customer_type).then(({data, error}) => {
+      this.formGroup.value.email
+    ).then(({data, error}) => {
       if (error) {
         console.log(error)
       } else {

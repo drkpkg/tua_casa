@@ -193,7 +193,6 @@ export class SupabaseService {
     identity_document: string,
     phone: string,
     email: string,
-    customer_type: string,
   ) {
     let {data, error} = await this.supabase
       .rpc('create_customer_person', {
@@ -203,7 +202,6 @@ export class SupabaseService {
         identity_document: identity_document,
         phone: phone,
         email: email,
-        customer_type: customer_type,
       })
     return {data, error}
   }
@@ -358,6 +356,37 @@ export class SupabaseService {
         customer_id: customerId,
         payment_type: paymentType,
         date: moment().format('YYYY-MM-DD HH:mm:ss'),
+      }
+    ]);
+    return {data, error};
+  }
+
+  async getVehiclesByCustomerId(id: number) {
+    const {data, error} = await this.supabase
+      .from('vehicles')
+      .select('id, plate, color, created_at, brand: brand_id (id, name), description, customer_id')
+      .eq('customer_id', id)
+    return {data, error};
+  }
+
+  async getContractsByCustomerId(id: number) {
+    const {data, error} = await this.supabase.from('contracts').select('*').eq('customer_id', id)
+    return {data, error};
+  }
+
+  async getBrands() {
+    const {data, error} = await this.supabase.from('brands').select('*')
+    return {data, error};
+  }
+
+  async addVehicle(plate: string, color: string, brandId: number, description: string, customerId: number) {
+    const {data, error} = await this.supabase.from('vehicles').insert([
+      {
+        plate: plate,
+        color: color,
+        brand_id: brandId,
+        description: description,
+        customer_id: customerId,
       }
     ]);
     return {data, error};
