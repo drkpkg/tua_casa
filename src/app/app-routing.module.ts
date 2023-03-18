@@ -35,7 +35,7 @@ const routes: Routes = [
     pathMatch: "full"
   },
   {
-    path: 'clients/:id/vehicles/:vehicle_id/info',
+    path: 'clients/:id/vehicles/:vehicle_id',
     loadChildren: () => import('./pages/vehicle-info/vehicle-info.module').then(m => m.VehicleInfoModule),
     pathMatch: "full"
   },

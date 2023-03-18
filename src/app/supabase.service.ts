@@ -391,4 +391,58 @@ export class SupabaseService {
     ]);
     return {data, error};
   }
+
+  async getVehicleById(vehicleId: number) {
+    const {data, error} = await this.supabase
+      .from('vehicles')
+      .select('id, plate, color, created_at, brand: brand_id (id, name), description, customer_id')
+      .eq('id', vehicleId)
+    return {data, error};
+  }
+
+  async getContractsByVehicleId(vehicleId: number) {
+    const {data, error} = await this.supabase
+      .from('contracts')
+      .select('id, start_date, end_date, total_amount, active, created_at, customer: customer_id (id, person: person_id (name, surname, lastname, identity_document))')
+      .eq('vehicle_id', vehicleId)
+    return {data, error};
+  }
+
+  async deactivateContract(id: number) {
+    const {data, error} = await this.supabase.from('contracts').update({
+      active: false,
+    }).eq('id', id);
+    return {data, error};
+  }
+
+  //
+  async createContract(startDate: string, endDate: string, totalAmount: number, customerId: number, vehicleId: number) {
+    const {data, error} = await this.supabase.from('contracts').insert([
+      {
+        name: `Contrato ${moment().format('YYYY-MM-DD HH:mm:ss')}`,
+        start_date: startDate,
+        end_date: endDate,
+        total_amount: totalAmount,
+        customer_id: customerId,
+        vehicle_id: vehicleId,
+      }
+    ]);
+    return {data, error};
+  }
+
+  async registerIngress(vehicle_id: number, customer_id: number, amount: number) {
+    const {data, error} = await this.supabase.rpc('create_ingress', {
+      vehicle: vehicle_id,
+      customer: customer_id,
+      amount: amount,
+    })
+    return {data, error};
+  }
+
+  async registerEgress(vehicle_id: number) {
+    const {data, error} = await this.supabase.rpc('create_egress', {
+      vehicle: vehicle_id,
+    })
+    return {data, error};
+  }
 }

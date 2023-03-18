@@ -38,7 +38,9 @@
       <td>{{data?.color}}</td>
       <td>{{data?.brand?.name}}</td>
       <td>
-        <button nz-button nzType="primary" (click)="viewProperty(data.id)">Ver</button>
+        <button nz-button nzType="primary" (click)="viewVehicle(data.id)">Ver</button>
+        <button nz-button nzType="primary" (click)="registerIngress(data.id, customer.id)">Registrar ingreso</button>
+        <button nz-button nzType="primary" (click)="registerEgress(data.id)">Registrar egreso</button>
       </td>
     </tr>
     </tbody>
@@ -46,7 +48,7 @@
 </ng-container>
 <nz-divider nzType="horizontal"></nz-divider>
 <ng-container>
-  <nz-table #basicTable [nzData]="dataSetContracts">
+  <nz-table #basicTableContract [nzData]="dataSetContracts">
     <thead>
     <tr>
       <th>Contrato</th>
@@ -60,7 +62,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let data of basicTable.data">
+    <tr *ngFor="let data of basicTableContract.data">
       <td>{{data?.id}}</td>
       <td>{{data?.start_date}}</td>
       <td>{{data?.end_date}}</td>

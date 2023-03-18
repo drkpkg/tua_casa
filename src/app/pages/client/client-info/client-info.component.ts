@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SupabaseService} from "../../../supabase.service";
+import * as moment from "moment";
 
 
 @Component({
@@ -30,7 +31,6 @@ export class ClientInfoComponent implements OnInit {
           console.log('error', error)
         } else {
           this.customer = data ? data[0] : {};
-          console.log('customer', this.customer);
           this.loading = false;
         }
       });
@@ -45,7 +45,6 @@ export class ClientInfoComponent implements OnInit {
         if (error) {
           console.log('error', error)
         } else {
-          console.log('data', data);
           this.dataSetContracts = data ? data : [];
         }
       });
@@ -74,5 +73,29 @@ export class ClientInfoComponent implements OnInit {
 
   addContract() {
     this.router.navigate([`/clients/${this.id}/contracts/new`]);
+  }
+
+  viewVehicle(id: number) {
+    this.router.navigate([`/clients/${this.id}/vehicles/${id}`]);
+  }
+
+  registerIngress(vehicleId: number, customerId: number) {
+    this.supabaseService.registerIngress(vehicleId, customerId, 15.0).then(({data, error}) => {
+      if (error) {
+        console.log('error', error)
+      } else {
+        console.log('data', data)
+      }
+    });
+  }
+
+  registerEgress(vehicleId: number) {
+    this.supabaseService.registerEgress(vehicleId).then(({data, error}) => {
+      if (error) {
+        console.log('error', error)
+      } else {
+        console.log('data', data)
+      }
+    });
   }
 }
