@@ -1,44 +1,22 @@
 <header>
-  <h1>Tua Casa</h1>
+  <h1>Central park</h1>
   <nav>
     <ul>
       <li><a href="#">Inicio</a></li>
-      <li><a href="#">Casas disponibles</a></li>
+      <li><a href="#">Nuestra instalación</a></li>
       <li><a href="#">Contacto</a></li>
-      <li><a routerLink="/login">Iniciar sesión</a></li>
-      <li><a routerLink="/signup">Registrarse</a></li>
+      <li *ngIf="!hasUser"><a routerLink="/login">Iniciar sesión</a></li>
+      <li *ngIf="!hasUser"><a routerLink="/signup">Registrarse</a></li>
     </ul>
   </nav>
 </header>
 <main>
-  <section>
-    <h2>Bienvenido a Tua casa</h2>
-    <p>Encuentra la casa perfecta para tus vacaciones o escapadas de fin de semana. Ofrecemos casas en distintas ubicaciones y tamaños.</p>
-    <a href="#">Ver casas disponibles</a>
-  </section>
-  <section>
-    <h2>Algunas de nuestras casas destacadas</h2>
-    <div class="casa-destacada">
-      <img src="/assets/images/casa1.jpg" alt="Casa 1">
-      <h3>Casa de campo en la montaña</h3>
-      <p>Disfruta de la tranquilidad y belleza de la montaña en esta hermosa casa de campo.</p>
-      <a href="#">Más información</a>
-    </div>
-    <div class="casa-destacada">
-      <img src="/assets/images/casa2.jpg" alt="Casa 2">
-      <h3>Casa en la playa</h3>
-      <p>Vive la experiencia de estar en una casa frente al mar en una de las mejores playas del país.</p>
-      <a href="#">Más información</a>
-    </div>
-    <div class="casa-destacada">
-      <img src="/assets/images/casa3.jpg" alt="Casa 3">
-      <h3>Casa en la ciudad</h3>
-      <p>Disfruta de la vida urbana en esta cómoda casa en el centro de la ciudad.</p>
-      <a href="#">Más información</a>
-    </div>
-    <app-map [showMarker]="true" [markerGPS]="true" [markerDraggable]="true"></app-map>
-  </section>
+  <h2>Parqueo de 5 plantas en Santa Cruz de la Sierra</h2>
+  <p>Bienvenidos a Central Park, nuestro edificio de parqueos cuenta con cinco pisos y una capacidad para más de 500
+    vehículos.</p>
+<!--  <img src="centralpark.jpg" alt="Central Park">-->
 </main>
+
 <footer>
-  <p>Tua Casa &copy; 2023</p>
+  <p>Central park &copy; 2023</p>
 </footer>
