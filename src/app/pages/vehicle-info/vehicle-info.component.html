@@ -1,1 +1,74 @@
-<p>vehicle-info works!</p>
+<ng-container>
+  <nz-card nzTitle="Información del vehículo">
+    <p>Marca: {{vehicle?.brand?.name}}</p>
+    <p>Color: {{vehicle?.color}}</p>
+    <p>Placa: {{vehicle?.plate}}</p>
+    <p>Descripción: {{vehicle?.description}}</p>
+  </nz-card>
+</ng-container>
+<ng-container>
+  <nz-button-group>
+    <button nz-button nzType="primary" (click)="showModalNewContract()">Nuevo contrato</button>
+  </nz-button-group>
+  <nz-table #table [nzData]="vehicleContractList" nzBordered>
+    <thead>
+    <tr>
+      <th>Fecha de inicio</th>
+      <th>Fecha de fin</th>
+      <th>Monto</th>
+      <th>Cliente</th>
+      <th>Fecha de creación</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let vehicleContract of table.data" style="background: {{vehicleContract?.active ? 'white' : 'red'}}">
+      <td>{{vehicleContract?.start_date | date: 'dd/MM/yyyy'}}</td>
+      <td>{{vehicleContract?.end_date | date: 'dd/MM/yyyy'}}</td>
+      <td>{{vehicleContract?.total_amount}}</td>
+      <td>{{vehicleContract?.customer?.person?.name}} {{vehicleContract?.customer?.person?.surname}} {{vehicleContract?.customer?.person?.lastname}}</td>
+      <td>{{vehicleContract?.created_at | date: 'dd/MM/yyyy'}}</td>
+      <td>
+        <button nz-button nzType="primary" (click)="deactivateContract(vehicleContract.id)" *ngIf="vehicleContract?.active">Desactivar Contrato</button>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</ng-container>
+<ng-container>
+  <nz-modal [(nzVisible)]="isVisibleNewContract" nzTitle="Nuevo contrato" (nzOnCancel)="handleCancel()"
+            (nzOnOk)="handleOk()">
+    <div *nzModalContent>
+      <form nz-form [nzLayout]="'vertical'" [formGroup]="formNewContract">
+        <nz-form-item>
+          <nz-form-label nzFor="contract_type" nzRequired>Tipo de contrato</nz-form-label>
+          <nz-form-control>
+            <nz-select formControlName="contract_type" id="contract_type" placeholder="Tipo de contrato">
+              <nz-option nzLabel="Visitante" nzValue="visitor"></nz-option>
+              <nz-option nzLabel="Contrato" nzValue="contract"></nz-option>
+              <nz-option nzLabel="Contrato VIP" nzValue="contract_vip"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzFor="start_date" nzRequired>Fecha de inicio</nz-form-label>
+          <nz-form-control>
+            <input nz-input formControlName="start_date" id="start_date" type="datetime-local" placeholder="Fecha de inicio"/>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzFor="end_date" nzRequired>Fecha de fin</nz-form-label>
+          <nz-form-control>
+            <input nz-input formControlName="end_date" id="end_date" type="datetime-local" placeholder="Fecha de fin"/>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzFor="total_amount" nzRequired>Monto</nz-form-label>
+          <nz-form-control>
+            <input nz-input formControlName="total_amount" id="total_amount" type="number" placeholder="Monto"/>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+  </nz-modal>
+</ng-container>

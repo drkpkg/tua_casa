@@ -1,36 +1,33 @@
 <ng-container>
-   <nz-select class="nz-select--large" [(ngModel)]="selectedType" (ngModelChange)="filterTable()">
-      <nz-option nzLabel="Todos" nzValue="all"></nz-option>
-      <nz-option nzLabel="Visitante" nzValue="visitor"></nz-option>
-      <nz-option nzLabel="Abonado" nzValue="subscriber"></nz-option>
-      <nz-option nzLabel="Abonado vip" nzValue="subscriber_vip"></nz-option>
-    </nz-select>
-    <button nz-button nzType="primary" (click)="filterTable()">Filtrar</button>
+  <nz-select class="nz-select--large" [(ngModel)]="selectedType" (ngModelChange)="filterTable()">
+    <nz-option nzLabel="Todos" nzValue="all"></nz-option>
+    <nz-option nzLabel="Visitante" nzValue="visitor"></nz-option>
+    <nz-option nzLabel="Abonado" nzValue="subscriber"></nz-option>
+    <nz-option nzLabel="Abonado vip" nzValue="subscriber_vip"></nz-option>
+  </nz-select>
+  <button nz-button nzType="primary" (click)="filterTable()">Filtrar</button>
   <nz-table #basicTable [nzData]="dataSet">
     <thead>
-      <tr>
-        <th>Nombre y apellido</th>
-        <th>Documento de identidad</th>
-        <th>Correo electrónico</th>
-        <th>Telefono</th>
-        <th>Tipo de cliente</th>
-        <th>Acciones</th>
-      </tr>
+    <tr>
+      <th>Nombre y apellido</th>
+      <th>Documento de identidad</th>
+      <th>Correo electrónico</th>
+      <th>Telefono</th>
+      <th>Acciones</th>
+    </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of basicTable.data">
-        <td>{{data.fullName}}</td>
-        <td>{{data.identity_document}}</td>
-        <td>{{data.email}}</td>
-        <td>{{data.phone}}</td>
-        <td>{{ data.customer_type === 0 ? 'Dueño' : data.customer_type === 1 ? 'Arrendatario' : 'Dueño e Inquilino' }}
-        </td>
-        <td>
-          <a routerLink="/clients/{{data.id}}">Ver</a>
-          <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="showModal(data.id)">Elmininar</a>
-        </td>
-      </tr>
+    <tr *ngFor="let data of basicTable.data">
+      <td>{{data.fullName}}</td>
+      <td>{{data.identity_document}}</td>
+      <td>{{data.email}}</td>
+      <td>{{data.phone}}</td>
+      <td>
+        <a routerLink="/clients/{{data.id}}">Ver</a>
+        <nz-divider nzType="vertical"></nz-divider>
+        <a (click)="showModal(data.id)">Elmininar</a>
+      </td>
+    </tr>
     </tbody>
   </nz-table>
 </ng-container>
