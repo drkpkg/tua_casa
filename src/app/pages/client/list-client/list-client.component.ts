@@ -53,6 +53,7 @@ export class ListClientComponent implements OnInit {
       if (error) {
         console.log('error', error)
       } else {
+        console.log(dataValue);
         this.dataSet = Customer.fromJsonList(dataValue);
       }
     });
