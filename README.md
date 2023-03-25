@@ -34,5 +34,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ### Run
 
-`docker run -p 4200:4200 tuaparking:latest`
+Set the env $SUPABASE_URL and $SUPABASE_KEY
+
+`docker run -p 4200:80 -e SUPABASE_URL=$SUPABASE_URL -e SUPABASE_KEY=$SUPABASE_KEY tuaparking:latest`
 
