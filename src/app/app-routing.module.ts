@@ -40,12 +40,12 @@ const routes: Routes = [
     pathMatch: "full"
   },
   {
-    path: 'clients/:id/vehicles/:vehicle_id/contracts',
-    loadChildren: () => import('./pages/contract/contract.module').then(m => m.ContractModule),
+    path: 'clients/:id/contracts/:contract_id',
+    loadChildren: () => import('./pages/info-contract/info-contract.module').then(m => m.InfoContractModule),
     pathMatch: "full"
   },
   {
-    path: 'clients/:id/vehicles/:vehicle_id/contracts/new',
+    path: 'clients/:id/contracts/new',
     loadChildren: () => import('./pages/new-contract/new-contract.module').then(m => m.NewContractModule),
     pathMatch: "full"
   },

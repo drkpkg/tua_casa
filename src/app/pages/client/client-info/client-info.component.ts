@@ -15,39 +15,65 @@ export class ClientInfoComponent implements OnInit {
   customer: any;
   dataSetContracts: any[];
   dataSetVehicles: any[];
+  dataSetParkingHistory: any[];
 
   constructor(private supabaseService: SupabaseService, private activatedRoute: ActivatedRoute, private router: Router) {
     this.id = 0;
     this.loading = true;
     this.dataSetContracts = [];
     this.dataSetVehicles = [];
+    this.dataSetParkingHistory = [];
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'];
-      this.supabaseService.getCustomerById(this.id).then(({data, error}) => {
-        if (error) {
-          console.log('error', error)
-        } else {
-          this.customer = data ? data[0] : {};
-          this.loading = false;
-        }
-      });
-      this.supabaseService.getVehiclesByCustomerId(this.id).then(({data, error}) => {
-        if (error) {
-          console.log('error', error)
-        } else {
-          this.dataSetVehicles = data ? data : [];
-        }
-      });
-      this.supabaseService.getContractsByCustomerId(this.id).then(({data, error}) => {
-        if (error) {
-          console.log('error', error)
-        } else {
-          this.dataSetContracts = data ? data : [];
-        }
-      });
+      this.loadCustomer();
+      this.loadVehicles();
+      this.loadContracts();
+      this.loadParkingHistory();
+    });
+  }
+
+  loadCustomer() {
+    this.supabaseService.getCustomerById(this.id).then(({data, error}) => {
+      if (error) {
+        console.log('error', error)
+      } else {
+        this.customer = data ? data[0] : {};
+        this.loading = false;
+      }
+    });
+  }
+
+  loadVehicles() {
+    this.supabaseService.getVehiclesByCustomerId(this.id).then(({data, error}) => {
+      if (error) {
+        console.log('error', error)
+      } else {
+        this.dataSetVehicles = data ? data : [];
+      }
+    });
+  }
+
+  loadContracts() {
+    this.supabaseService.getContractsByCustomerId(this.id).then(({data, error}) => {
+      if (error) {
+        console.log('error', error)
+      } else {
+        this.dataSetContracts = data ? data : [];
+        // console.log('data', this.dataSetContracts);
+      }
+    });
+  }
+
+  loadParkingHistory() {
+    this.supabaseService.getParkingHistoryByCustomerId(this.id).then(({data, error}) => {
+      if (error) {
+        console.log('error', error)
+      } else {
+        this.dataSetParkingHistory = data ? data : [];
+      }
     });
   }
 
@@ -64,7 +90,7 @@ export class ClientInfoComponent implements OnInit {
   }
 
   viewContract(id: number) {
-    this.router.navigate(['/contracts', id]);
+    this.router.navigate([`/clients/${this.id}/contracts/${id}`]);
   }
 
   addVehicle() {
@@ -79,22 +105,22 @@ export class ClientInfoComponent implements OnInit {
     this.router.navigate([`/clients/${this.id}/vehicles/${id}`]);
   }
 
-  registerIngress(vehicleId: number, customerId: number) {
-    this.supabaseService.registerIngress(vehicleId, customerId, 15.0).then(({data, error}) => {
+  registerIngress() {
+    this.supabaseService.registerIngress(this.customer?.id, 15.0).then(({data, error}) => {
       if (error) {
         console.log('error', error)
       } else {
-        console.log('data', data)
+        this.loadParkingHistory()
       }
     });
   }
 
-  registerEgress(vehicleId: number) {
-    this.supabaseService.registerEgress(vehicleId).then(({data, error}) => {
+  registerEgress() {
+    this.supabaseService.registerEgress(this.customer?.id).then(({data, error}) => {
       if (error) {
         console.log('error', error)
       } else {
-        console.log('data', data)
+        this.loadParkingHistory()
       }
     });
   }

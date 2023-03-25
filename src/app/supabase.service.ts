@@ -430,27 +430,41 @@ export class SupabaseService {
     return {data, error};
   }
 
-  async registerIngress(vehicle_id: number, customer_id: number, amount: number) {
+  async registerIngress(customer_id: number, amount: number) {
     const {data, error} = await this.supabase.rpc('create_ingress', {
-      vehicle: vehicle_id,
       customer: customer_id,
       amount: amount,
     })
     return {data, error};
   }
 
-  async registerEgress(vehicle_id: number) {
+  async registerEgress(customer_id: number) {
     const {data, error} = await this.supabase.rpc('create_egress', {
-      vehicle: vehicle_id,
+      customer: customer_id,
     })
     return {data, error};
   }
 
   async getParkingSpaces() {
-    const {
-      data,
-      error
-    } = await this.supabase.from('parking_spaces').select('*').order('parking_floor', {ascending: true})
+    const {data, error} = await this.supabase.from('parking_spaces').select('*')
+      .order('parking_floor', {ascending: true})
+    return {data, error};
+  }
+
+  async getTicketsByCustomerId(id: number) {
+    const {data, error} = await this.supabase.from('tickets').select('*').eq('customer_id', id)
+    return {data, error};
+  }
+
+  async getParkingHistoryByCustomerId(id: number) {
+    const {data, error} = await this.supabase
+      .from('parking_history')
+      .select('*').eq('ticket_customer_id', id)
+    return {data, error};
+  }
+
+  async getContractById(contract_id: number) {
+    const {data, error} = await this.supabase.from('contracts').select('*').eq('id', contract_id)
     return {data, error};
   }
 }

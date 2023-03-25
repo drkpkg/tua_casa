@@ -1,6 +1,6 @@
 <ng-container>
   <nz-row>
-    <nz-card [nzLoading]="loading" style="width: 100%">
+    <nz-card [nzLoading]="loading" style="width: 100%" [nzActions]="[actionIngress, actionEgress, actionBack]">
       <nz-card-meta
         nzTitle="Nombre"
         nzDescription="{{customer?.name}} {{customer?.surname}} {{customer?.lastname}}"></nz-card-meta>
@@ -11,9 +11,15 @@
       <nz-divider nzType="horizontal"></nz-divider>
       <nz-card-meta nzTitle="Documento de identidad" nzDescription="{{customer?.identity_document}}"></nz-card-meta>
     </nz-card>
-    <nz-button-group>
+    <ng-template #actionIngress>
+      <button nz-button nzType="primary" (click)="registerIngress()">Registrar ingreso</button>
+    </ng-template>
+    <ng-template #actionEgress>
+      <button nz-button nzType="primary" (click)="registerEgress()">Registrar egreso</button>
+    </ng-template>
+    <ng-template #actionBack>
       <button nz-button nzType="primary" (click)="back()">Regresar</button>
-    </nz-button-group>
+    </ng-template>
   </nz-row>
 </ng-container>
 <nz-divider nzType="horizontal"></nz-divider>
@@ -39,8 +45,6 @@
       <td>{{data?.brand?.name}}</td>
       <td>
         <button nz-button nzType="primary" (click)="viewVehicle(data.id)">Ver</button>
-        <button nz-button nzType="primary" (click)="registerIngress(data.id, customer.id)">Registrar ingreso</button>
-        <button nz-button nzType="primary" (click)="registerEgress(data.id)">Registrar egreso</button>
       </td>
     </tr>
     </tbody>
@@ -48,30 +52,36 @@
 </ng-container>
 <nz-divider nzType="horizontal"></nz-divider>
 <ng-container>
-  <nz-table #basicTableContract [nzData]="dataSetContracts">
+  <nz-table #basicTableContract [nzData]="dataSetParkingHistory">
     <thead>
     <tr>
-      <th>Contrato</th>
       <th>Fecha de inicio</th>
       <th>Fecha de fin</th>
-      <th>Vehículo</th>
-      <th>Monto</th>
+      <th>Monto total</th>
+      <th>Parqueo asignado</th>
+      <th>Piso de parqueo</th>
       <th>Tipo de contrato</th>
-      <th>Empleado</th>
+      <th>Activo</th>
+      <th>Contrato activo</th>
+      <th>Nombre del contrato</th>
       <th>Acciones</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let data of basicTableContract.data">
-      <td>{{data?.id}}</td>
-      <td>{{data?.start_date}}</td>
-      <td>{{data?.end_date}}</td>
-      <td>{{data?.vehicle?.description}}</td>
-      <td>{{data?.amount_total}}</td>
+      <td>{{data?.parking_start_date}}</td>
+      <td>{{data?.parking_end_date}}</td>
+      <td>{{data?.ticket_amount}}</td>
+      <td>{{data?.parking_space_code}}</td>
+      <td>{{data?.parking_floor}}</td>
       <td>{{data?.contract_type}}</td>
-      <td>{{data?.employee?.name}}</td>
+      <td>{{data?.contract_active}}</td>
+      <td>{{data?.contract_total_amount}}</td>
+      <td>{{data?.contract_start_date}}</td>
+      <td>{{data?.contract_end_date}}</td>
+      <td>{{data?.contract_name}}</td>
       <td>
-        <button nz-button nzType="primary" (click)="viewContract(data.id)">Ver</button>
+        <button nz-button nzType="primary" (click)="viewContract(data?.ticket_contract_id)">Ver</button>
       </td>
     </tr>
     </tbody>
