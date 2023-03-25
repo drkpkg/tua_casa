@@ -9,11 +9,11 @@ COPY package.json .
 RUN npm cache clean --force
 RUN npm install
 COPY . .
-RUN cp src/environments/environment.ts ./src/environments/environment.prod.ts
-RUN cp src/environments/environment.ts ./src/environments/environment.ts
 RUN npm run build --prod
 
 FROM nginx:1.21-alpine
-COPY --from=builder /app/dist/ /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# remove html folder
+RUN rm -rf /usr/share/nginx/html/*
+# copy dist folder
+COPY --from=builder /app/dist/. /usr/share/nginx/html
 EXPOSE 80
