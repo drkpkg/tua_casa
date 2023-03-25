@@ -1,15 +1,16 @@
-FROM node:18-alpine as builder
+FROM ubuntu:22.04 as builder
 WORKDIR /app
+# install nodejs v18.14.0
+RUN apt-get update && apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
+RUN npm i -g @angular/cli
 COPY package.json .
-RUN npm install -g npm@9.6.2
-RUN npm update
+RUN npm cache clean --force
 RUN npm install
 COPY . .
-RUN echo "export const environment = {" > src/environments/environment.ts && \
-    echo "  production: true," >> src/environments/environment.ts && \
-    echo "  supabaseUrl: '$SUPABASE_URL'," >> src/environments/environment.ts && \
-    echo "  supabaseKey: '$SUPABASE_KEY'," >> src/environments/environment.ts && \
-    echo "}" >> src/environments/environment.ts
+RUN cp src/environments/environment.ts ./src/environments/environment.prod.ts
+RUN cp src/environments/environment.ts ./src/environments/environment.ts
 RUN npm run build --prod
 
 FROM nginx:1.21-alpine

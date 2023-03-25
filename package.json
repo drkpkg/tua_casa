@@ -23,7 +23,6 @@
     "@angular/platform-browser-dynamic": "^15.1.0",
     "@angular/platform-server": "^15.1.0",
     "@angular/router": "^15.1.0",
-    "@ngneat/effects-ng": "^3.0.0",
     "@ngneat/elf": "^2.3.1",
     "@ngneat/elf-cli-ng": "^1.0.0",
     "@ngneat/elf-devtools": "^1.2.1",
