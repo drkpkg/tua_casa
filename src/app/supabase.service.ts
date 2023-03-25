@@ -391,4 +391,12 @@ export class SupabaseService {
     ]);
     return {data, error};
   }
+
+  async getParkingSpaces() {
+    const {
+      data,
+      error
+    } = await this.supabase.from('parking_spaces').select('*').order('parking_floor', {ascending: true})
+    return {data, error};
+  }
 }

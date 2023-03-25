@@ -20,6 +20,12 @@
           <li nz-menu-item nzMatchRouter>
             <a routerLink="clients">Clientes</a>
           </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="employees">Empleados</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="parking-spaces">Espacios de parqueo</a>
+          </li>
         </ul>
       </li>
     </ul>
@@ -29,8 +35,8 @@
       <div class="app-header">
         <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
             <span class="trigger"
-               nz-icon
-               [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+                  nz-icon
+                  [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             ></span>
         </span>
       </div>

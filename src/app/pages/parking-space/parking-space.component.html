@@ -1,0 +1,17 @@
+<ng-container>
+  <div *ngFor="let floor of parkingData" nz-row nzJustify="start">
+    <div nz-col nzSpan="24">
+      <div nz-row>
+        <div nz-col nzSpan="12">
+          <h3>Piso - {{floor?.parkingFloor}}</h3>
+        </div>
+      </div>
+      <div nz-row nzJustify="start" nzGutter="16">
+        <div *ngFor="let item of floor?.parkingList" nz-col class="box-seat"
+             [style]="{'background-color': item?.status == true ? '#43B018FF' : '#FF0000FF'}">
+          <div>{{item?.id}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

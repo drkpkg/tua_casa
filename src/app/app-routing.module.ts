@@ -136,10 +136,17 @@ const routes: Routes = [
   {
     path: 'properties/:id/edit',
     loadChildren: () => import('./pages/property-edit/property-edit.module').then(m => m.PropertyEditModule),
+    pathMatch: "full",
   },
   {
     path: 'properties/:id/documents',
     loadChildren: () => import('./pages/property-document/property-document.module').then(m => m.PropertyDocumentModule),
+    pathMatch: "full",
+  },
+  {
+    path: 'parking-spaces',
+    loadChildren: () => import('./pages/parking-space/parking-space.module').then(m => m.ParkingSpaceModule),
+    pathMatch: "full",
   }
 
 ];
