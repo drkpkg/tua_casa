@@ -1,10 +1,12 @@
+-- 924d041a-25c1-4ce4-83d7-7a04a6498653 testuser@test.com
+-- bc200175-a0bd-4c33-b6e2-cd3a60ae938a admintest@test.com
+-- 81707803-131f-40ae-8e0a-05a26948d1d8 customertest1@test.com
+-- 5da968f4-cf1f-4997-a363-74cf6230470f customertest2@test.com
+
 -- Insert para la tabla customers
 INSERT INTO customers (first_name, last_name, phone, email, user_id)
-VALUES ('John', 'Doe', '+123456789', 'johndoe@example.com', '5dab89a8-29a9-4cc9-9f16-864a8d584294'),
-       ('Jane', 'Doe', '+987654321', 'janedoe@example.com', '9f5f6358-37d4-4a88-8531-2d7cf4c38db4'),
-       ('Peter', 'Parker', '+555555555', 'pparker@example.com', '3f5f6358-37d4-4a88-8531-2d7cf4c38db4'),
-       ('Mary', 'Jane', '+444444444', 'mjane@example.com', '3f5f6358-37d4-4a88-8531-2d7cf4c38db4'),
-       ('Bruce', 'Wayne', '+666666666', 'bwayne@example.com', '3f5f6358-37d4-4a88-8531-2d7cf4c38db4');
+VALUES ('Bruce', 'Wayne', '1234567890', 'testuser@test.com', '924d041a-25c1-4ce4-83d7-7a04a6498653'),
+       ('Peter', 'Parker', '0987654321', 'admintest@test.com',
 
 -- Insert para la tabla agents
 INSERT INTO agents (first_name, last_name, city, commission_percentage, user_id)
@@ -29,6 +31,3 @@ insert into property_transfers (property_id, seller_id, buyer_id, transfer_date,
 values (3, 1, 2, '2020-01-01', 1000000.00),
        (5, 4, 3, '2020-01-01', 750000.00);
 
-INSERT INTO auth.users (id, instance_id, email, email_confirmed_at, encrypted_password, aud, "role", raw_app_meta_data,
-                        raw_user_meta_data, created_at, updated_at, last_sign_in_at, confirmation_token, email_change,
-                        email_change_token_new, recovery_token)
