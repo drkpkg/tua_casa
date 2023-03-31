@@ -1,0 +1,91 @@
+@startuml
+
+!define ENTITY_ATTRIBUTES
+!define ENTITY_PRIMARY_KEY
+!define ENTITY_FOREIGN_KEY
+
+entity "customers" {
+    +id : int <<generated>>
+    -first_name : varchar(50)
+    -last_name : varchar(50)
+    -phone : varchar(20)
+    -email : varchar(100)
+    -user_id : uuid
+    -created_at : timestamp
+    -updated_at : timestamp
+}
+
+entity "agents" {
+    +id : int <<generated>>
+    -first_name : varchar(50)
+    -last_name : varchar(50)
+    -city : varchar(50)
+    -commission_percentage : numeric(5,2)
+    -user_id : uuid
+    -created_at : timestamp
+    -updated_at : timestamp
+}
+
+entity "properties" {
+    +id : int <<generated>>
+    -operation_type : varchar(20)
+    -location : varchar(100)
+    -size : numeric(10,2)
+    -photos : bytea[]
+    -owners : varchar(200)
+    -price : numeric(10,2)
+    -availability_status : varchar(20)
+    -agent_id : int
+    -created_at : timestamp
+    -updated_at : timestamp
+    -customer_id : int
+}
+
+entity "interested_customers" {
+    +id : int <<generated>>
+    -customer_id : int
+    -property_id : int
+    -deposit_amount : numeric(10,2)
+    -created_at : timestamp
+    -updated_at : timestamp
+}
+
+entity "customer_properties" {
+    +id : int <<generated>>
+    -customer_id : int
+    -property_id : int
+    -created_at : timestamp
+    -updated_at : timestamp
+}
+
+entity "property_transfers" {
+    +id : int <<generated>>
+    -property_id : int
+    -seller_id : int
+    -buyer_id : int
+    -transfer_date : date
+    -sale_price : numeric(10,2)
+}
+
+entity "attachments" {
+    +id : int <<generated>>
+    -model_name : varchar(100)
+    -model_id : int
+    -file_name : varchar(100)
+    -file_type : varchar(100)
+    -file_size : int
+    -url : varchar(100)
+    -created_at : timestamp
+    -updated_at : timestamp
+}
+
+customers |o--o{ interested_customers
+customers |o--o{ customer_properties
+properties |o--o{ interested_customers
+properties |o--o{ customer_properties
+agents ||--o{ properties
+customers ||--o{ property_transfers : seller
+customers ||--o{ property_transfers : buyer
+attachments ||--o{ properties
+
+@enduml
