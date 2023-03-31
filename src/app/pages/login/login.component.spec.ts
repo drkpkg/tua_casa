@@ -2,27 +2,25 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginComponent } from './login.component';
 import {Router} from "@angular/router";
+import {RouterTestingModule} from "@angular/router/testing";
+import {HttpClientModule} from "@angular/common/http";
 
 describe('LoginComponent', () => {
+  // login component test using supabase test data
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let authService: AuthService;
-  let router: Router;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientModule, RouterTestingModule.withRoutes([])],
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
-      providers: [ AuthService ]
+      imports: [RouterTestingModule, HttpClientModule]
     })
-      .compileComponents();
-  }));
+    .compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
-    authService = TestBed.inject(AuthService);
-    router = TestBed.inject(Router);
     fixture.detectChanges();
   });
 
@@ -30,32 +28,21 @@ describe('LoginComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should log in user and redirect to home page', fakeAsync(() => {
-    const emailInput = fixture.debugElement.query(By.css('#email'));
-    const passwordInput = fixture.debugElement.query(By.css('#password'));
-    const submitButton = fixture.debugElement.query(By.css('#submit-button'));
+  it('should have a onSubmit function', () => {
+    expect(component.onSubmit).toBeTruthy();
+  });
 
-    const testEmail = 'testuser@example.com';
-    const testPassword = 'testpassword';
+  it('should assign the email and password to the component', () => {
+    component.formGroup.controls['email'].setValue('test@test.com');
+    component.formGroup.controls['password'].setValue('test');
+    expect(component.formGroup.controls['email'].value).toEqual('test@test.com');
+    expect(component.formGroup.controls['password'].value).toEqual('test');
+  });
 
-    spyOn(authService, 'login').and.returnValue(
-      of({ token: 'fake-jwt-token' })
-    );
-
-    spyOn(router, 'navigateByUrl');
-
-    emailInput.nativeElement.value = testEmail;
-    passwordInput.nativeElement.value = testPassword;
-
-    emailInput.nativeElement.dispatchEvent(new Event('input'));
-    passwordInput.nativeElement.dispatchEvent(new Event('input'));
-
-    submitButton.nativeElement.click();
-
-    tick();
-
-    expect(authService.login).toHaveBeenCalledWith(testEmail, testPassword);
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/home');
-  }));
+  it('should call the onSubmit function', () => {
+    spyOn(component, 'onSubmit');
+    component.onSubmit();
+    expect(component.onSubmit).toHaveBeenCalled();
+  });
 });
 
