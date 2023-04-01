@@ -1,10 +1,9 @@
-export default class Customer { 
+export default class Customer {
     id : number;
     email : string;
     phone : string;
-    name : string;
-    surname : string;
-    lastname : string;
+    first_name : string;
+    last_name : string;
     identity_document : string;
     customer_type: number;
 
@@ -12,9 +11,8 @@ export default class Customer {
         this.id = 0;
         this.email = '';
         this.phone = '';
-        this.name = '';
-        this.surname = '';
-        this.lastname = '';
+        this.first_name = '';
+        this.last_name = '';
         this.identity_document = '';
         this.customer_type = 0;
     }
@@ -24,9 +22,8 @@ export default class Customer {
         customer.id = json.id;
         customer.email = json.email;
         customer.phone = json.phone;
-        customer.name = json.name;
-        customer.surname = json.surname;
-        customer.lastname = json.lastname;
+        customer.first_name = json.name;
+        customer.last_name = json.last_name;
         customer.identity_document = json.identity_document
         customer.customer_type = json.customer_type
         return customer
@@ -40,9 +37,9 @@ export default class Customer {
         return customers;
     }
 
-    
+
     public get fullName() : string {
-        return `${this.name} ${this.surname} ${this.lastname}`
+        return `${this.first_name} ${this.last_name}`
     }
-    
+
 }

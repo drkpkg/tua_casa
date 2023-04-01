@@ -187,23 +187,19 @@ export class SupabaseService {
   }
 
   async createCustomer(
-    name: string,
-    surname: string,
-    lastname: string,
+    first_name: string,
+    last_name: string,
     identity_document: string,
     phone: string,
     email: string,
-    customer_type: string,
   ) {
     let {data, error} = await this.supabase
       .rpc('create_customer_person', {
-        name: name,
-        surname: surname,
-        lastname: lastname,
-        identity_document: identity_document,
-        phone: phone,
-        email: email,
-        customer_type: customer_type,
+        customer_name: first_name,
+        customer_last_name: last_name,
+        customer_identity_document: identity_document,
+        customer_phone: phone,
+        customer_email: email,
       })
     return {data, error}
   }

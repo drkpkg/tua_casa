@@ -1,3 +1,11 @@
+CREATE TABLE cities
+(
+  id         SERIAL PRIMARY KEY,
+  name       VARCHAR(50) NOT NULL,
+  created_at TIMESTAMP   NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP   NOT NULL DEFAULT NOW()
+);
+
 CREATE TABLE customers
 (
   id         SERIAL PRIMARY KEY,
@@ -38,8 +46,6 @@ CREATE TABLE properties
   customer_id         INTEGER REFERENCES customers (id)
 );
 
-
-
 CREATE TABLE interested_customers
 (
   id             SERIAL PRIMARY KEY,
@@ -48,15 +54,6 @@ CREATE TABLE interested_customers
   deposit_amount NUMERIC(10, 2) NOT NULL,
   created_at     TIMESTAMP      NOT NULL DEFAULT NOW(),
   updated_at     TIMESTAMP      NOT NULL DEFAULT NOW()
-);
-
-CREATE TABLE customer_properties
-(
-  id          SERIAL PRIMARY KEY,
-  customer_id INTEGER   NOT NULL REFERENCES customers (id),
-  property_id INTEGER   NOT NULL REFERENCES properties (id),
-  created_at  TIMESTAMP NOT NULL DEFAULT NOW(),
-  updated_at  TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE property_transfers
@@ -68,6 +65,24 @@ CREATE TABLE property_transfers
   transfer_date DATE           NOT NULL,
   sale_price    NUMERIC(10, 2) NOT NULL
 );
+
+CREATE TABLE sales
+(
+  id               SERIAL PRIMARY KEY,
+  property_id      INTEGER        NOT NULL REFERENCES properties (id),
+  seller_id        INTEGER        NOT NULL REFERENCES customers (id),
+  seller_name      VARCHAR(100)   NOT NULL,
+  seller_last_name VARCHAR(100)   NOT NULL,
+  buyer_id         INTEGER        NOT NULL REFERENCES customers (id),
+  buyer_name       VARCHAR(100)   NOT NULL,
+  buyer_last_name  VARCHAR(100)   NOT NULL,
+  sale_date        DATE           NOT NULL,
+  sale_price       NUMERIC(10, 2) NOT NULL,
+  commission       NUMERIC(10, 2) NOT NULL,
+  created_at       TIMESTAMP      NOT NULL DEFAULT NOW(),
+  updated_at       TIMESTAMP      NOT NULL DEFAULT NOW()
+);
+
 
 CREATE TABLE attachments
 (

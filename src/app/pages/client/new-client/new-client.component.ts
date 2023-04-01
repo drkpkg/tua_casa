@@ -18,13 +18,11 @@ export class NewClientComponent implements OnInit {
     this.formBuilder = new FormBuilder();
     this.formGroup = this.formBuilder.group(
       {
-        name: new FormControl('', [Validators.required]),
-        surname: new FormControl('', [Validators.required]),
-        lastname: new FormControl('', [Validators.required]),
+        first_name: new FormControl('', [Validators.required]),
+        last_name: new FormControl('', [Validators.required]),
         identity_document: new FormControl('', [Validators.required]),
         email: new FormControl('', [Validators.required, Validators.email]),
         phone: new FormControl('', [Validators.required]),
-        customer_type: new FormControl('0', [Validators.required]),
       }
     );
     this.fallback =
@@ -37,13 +35,12 @@ export class NewClientComponent implements OnInit {
 
   onSubmit() {
     this.supabaseService.createCustomer(
-      this.formGroup.value.name,
-      this.formGroup.value.surname,
-      this.formGroup.value.lastname,
+      this.formGroup.value.first_name,
+      this.formGroup.value.last_name,
       this.formGroup.value.identity_document,
       this.formGroup.value.phone,
       this.formGroup.value.email,
-      this.formGroup.value.customer_type).then(({data, error}) => {
+      ).then(({data, error}) => {
       if (error) {
         console.log(error)
       } else {

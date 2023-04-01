@@ -3,21 +3,14 @@
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzPrefixIcon="user">
-            <input nz-input placeholder="Nombre" formControlName="name" type="text" />
+            <input nz-input placeholder="Nombre" formControlName="first_name" type="text" />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzPrefixIcon="user">
-            <input nz-input placeholder="Apellido paterno" formControlName="surname" type="text" />
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group nzPrefixIcon="user">
-            <input nz-input placeholder="Apellido materno" formControlName="lastname" type="text" />
+            <input nz-input placeholder="Apellidos" formControlName="last_name" type="text" />
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
@@ -42,25 +35,6 @@
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <nz-input-group>
-            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Tipo de cliente" formControlName="customer_type">
-              <nz-option nzLabel="Dueño" nzValue="0"></nz-option>
-              <nz-option nzLabel="Arrendatario" nzValue="1"></nz-option>
-              <nz-option nzLabel="Dueño e Arrendatario" nzValue="2"></nz-option>
-            </nz-select>
-          </nz-input-group>
-        </nz-form-control>
-      </nz-form-item>
-<!--      <nz-form-item>-->
-<!--        <nz-form-control>-->
-<!--          <nz-input-group>-->
-<!--            <img nz-image width="200px" height="200px"  [nzFallback]="fallback"/>-->
-<!--            <input nz-input type="file" (change)="onFileChange($event)" />-->
-<!--          </nz-input-group>-->
-<!--        </nz-form-control>-->
-<!--      </nz-form-item>-->
       <nz-form-item>
         <nz-form-control>
           <button nz-button nzType="primary" [disabled]="!formGroup.valid">Crear cliente</button>

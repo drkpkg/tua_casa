@@ -7,6 +7,7 @@ export default class User{
   created_at: string;
   updated_at: string;
   deleted_at: string | null;
+  last_sign_in_at: string | null;
 
   constructor() {
     this.id = 0;
@@ -15,6 +16,7 @@ export default class User{
     this.created_at = '';
     this.updated_at = '';
     this.deleted_at = '';
+    this.last_sign_in_at = '';
   }
 
   static fromJson(json: any): User {
@@ -25,6 +27,7 @@ export default class User{
     user.created_at = moment(json.created_at).format('DD-MM-YYYY');
     user.updated_at = moment(json.updated_at).format( 'DD-MM-YYYY');
     user.deleted_at = json.deleted_at ? moment(json.deleted_at).format('DD-MM-YYYY') : null;
+    user.last_sign_in_at = json.last_sign_in_at ? moment(json.last_sign_in_at).format('DD-MM-YYYY') : null;
     return user;
   }
 
