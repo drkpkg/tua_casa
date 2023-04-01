@@ -1,91 +1,88 @@
 @startuml
 
-!define ENTITY_ATTRIBUTES
-!define ENTITY_PRIMARY_KEY
-!define ENTITY_FOREIGN_KEY
+!define Table(name,desc) class name as "desc" << (T,#FFAAAA) >>
+!define primary_key(x) <b><font color="#0000FF">x</font></b>
+!define foreign_key(x) <font color="#00AA00">x</font>
 
-entity "customers" {
-    +id : int <<generated>>
-    -first_name : varchar(50)
-    -last_name : varchar(50)
-    -phone : varchar(20)
-    -email : varchar(100)
-    -user_id : uuid
-    -created_at : timestamp
-    -updated_at : timestamp
+skinparam classAttributeIconSize 0
+
+Table(customers, "Customers") {
+  primary_key(id integer)
+  first_name varchar(50) not null
+  last_name varchar(50) not null
+  phone varchar(20) not null
+  email varchar(100) not null
+  user_id uuid
+  created_at timestamp not null
+  updated_at timestamp not null
+  identity_document text
 }
 
-entity "agents" {
-    +id : int <<generated>>
-    -first_name : varchar(50)
-    -last_name : varchar(50)
-    -city : varchar(50)
-    -commission_percentage : numeric(5,2)
-    -user_id : uuid
-    -created_at : timestamp
-    -updated_at : timestamp
+Table(agents, "Agents") {
+  primary_key(id integer)
+  first_name varchar(50) not null
+  last_name varchar(50) not null
+  city varchar(50) not null
+  commission_percentage numeric(5,2) not null
+  user_id uuid not null
+  created_at timestamp not null
+  updated_at timestamp not null
 }
 
-entity "properties" {
-    +id : int <<generated>>
-    -operation_type : varchar(20)
-    -location : varchar(100)
-    -size : numeric(10,2)
-    -photos : bytea[]
-    -owners : varchar(200)
-    -price : numeric(10,2)
-    -availability_status : varchar(20)
-    -agent_id : int
-    -created_at : timestamp
-    -updated_at : timestamp
-    -customer_id : int
+Table(attachments, "Attachments") {
+  primary_key(id integer)
+  model_name varchar(100) not null
+  model_id integer not null
+  file_name varchar(100) not null
+  file_type varchar(100) not null
+  file_size integer not null
+  url varchar(100) not null
+  created_at timestamp not null
+  updated_at timestamp not null
 }
 
-entity "interested_customers" {
-    +id : int <<generated>>
-    -customer_id : int
-    -property_id : int
-    -deposit_amount : numeric(10,2)
-    -created_at : timestamp
-    -updated_at : timestamp
+Table(cities, "Cities") {
+  primary_key(id integer)
+  name varchar(50) not null
+  created_at timestamp not null
+  updated_at timestamp not null
 }
 
-entity "customer_properties" {
-    +id : int <<generated>>
-    -customer_id : int
-    -property_id : int
-    -created_at : timestamp
-    -updated_at : timestamp
+Table(properties, "Properties") {
+  primary_key(id integer)
+  operation_type varchar(20) not null
+  address text not null
+  photos bytea[]
+  owners varchar(200)
+  property_price numeric(10,2) not null
+  availability_status varchar(20) not null
+  agent_id integer
+  created_at timestamp not null
+  updated_at timestamp not null
+  customer_id integer
+  city_id integer
+  property_type text not null
+  latitude double precision not null
+  longitude double precision
+  property_size double precision
 }
 
-entity "property_transfers" {
-    +id : int <<generated>>
-    -property_id : int
-    -seller_id : int
-    -buyer_id : int
-    -transfer_date : date
-    -sale_price : numeric(10,2)
+Table(interested_customers, "Interested Customers") {
+  primary_key(id integer)
+  customer_id integer not null
+  property_id integer not null
+  deposit_amount numeric(10,2) not null
+  created_at timestamp not null
+  updated_at timestamp not null
 }
 
-entity "attachments" {
-    +id : int <<generated>>
-    -model_name : varchar(100)
-    -model_id : int
-    -file_name : varchar(100)
-    -file_type : varchar(100)
-    -file_size : int
-    -url : varchar(100)
-    -created_at : timestamp
-    -updated_at : timestamp
-}
-
-customers |o--o{ interested_customers
-customers |o--o{ customer_properties
-properties |o--o{ interested_customers
-properties |o--o{ customer_properties
-agents ||--o{ properties
-customers ||--o{ property_transfers : seller
-customers ||--o{ property_transfers : buyer
-attachments ||--o{ properties
+customers --|> auth.users : user_id
+agents --|> auth.users : user_id
+properties --|> agents : agent_id
+properties --|> customers : customer_id
+properties --|> cities : city_id
+interested_customers --|> customers : customer_id
+interested_customers --|> properties : property_id
+attachments --|> properties : model_id
 
 @enduml
