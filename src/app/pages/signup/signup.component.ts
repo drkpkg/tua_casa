@@ -39,8 +39,6 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formGroup.valid);
-    console.log(this.formGroup.errors);
     if (this.formGroup.valid && this.formGroup.value.password === this.formGroup.value.passwordConfirm) {
       this.supabaseService.createUser(
         this.formGroup.value.email,
@@ -48,23 +46,23 @@ export class SignupComponent implements OnInit {
       ).then((result) => {
         console.log(result);
         if (result.error) {
-
-        }else{
-          // this.supabaseService.createCustomer(
-          //   this.formGroup.value.name,
-          //   this.formGroup.value.surname,
-          //   this.formGroup.value.lastname,
-          //   this.formGroup.value.phone,
-          //   this.formGroup.value.customer_type,
-          //   this.formGroup.value.email
-          // ).then((result) => {
-          //   if (result.error) {
-          //     this.error = true;
-          //     this.errorMessage = result.error.message;
-          //   } else {
-          //     this.router.navigate(['/login']);
-          //   }
-          // });
+          this.error = true;
+          this.errorMessage = result.error.message;
+        } else {
+          this.supabaseService.createCustomer(
+            this.formGroup.value.name,
+            `${this.formGroup.value.surname} ${this.formGroup.value.lastname}`,
+            this.formGroup.value.phone,
+            this.formGroup.value.customer_type,
+            this.formGroup.value.email
+          ).then((result) => {
+            if (result.error) {
+              this.error = true;
+              this.errorMessage = result.error.message;
+            } else {
+              this.router.navigate(['/login']);
+            }
+          });
         }
       });
     }

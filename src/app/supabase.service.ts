@@ -193,15 +193,15 @@ export class SupabaseService {
     phone: string,
     email: string,
   ) {
-    let {data, error} = await this.supabase
-      .rpc('create_customer_person', {
-        customer_name: first_name,
-        customer_last_name: last_name,
-        customer_identity_document: identity_document,
-        customer_phone: phone,
-        customer_email: email,
-      })
-    return {data, error}
+    const {data, error} = await this.supabase.from('customers').insert([
+      {
+        first_name: first_name,
+        last_name: last_name,
+        identity_document: identity_document,
+        phone: phone,
+        email: email,
+      }]);
+    return {data, error};
   }
 
   async deleteCustomer(id: number) {
