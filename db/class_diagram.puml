@@ -1,4 +1,5 @@
 @startuml
+
 class customers {
     -id: serial
     -first_name: varchar(50)
@@ -74,5 +75,6 @@ agents -- properties
 properties -- interested_customers
 attachments -- properties
 cities -- properties
+
 
 @enduml

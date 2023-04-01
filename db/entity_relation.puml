@@ -1,88 +1,88 @@
 @startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define primary_key(x) <u>x</u>
+!define foreign_key(x) <&diamond-x&> x
 
-!define Table(name,desc) class name as "desc" << (T,#FFAAAA) >>
-!define primary_key(x) <b><font color="#0000FF">x</font></b>
-!define foreign_key(x) <font color="#00AA00">x</font>
+hide circle
 
-skinparam classAttributeIconSize 0
-
-Table(customers, "Customers") {
-  primary_key(id integer)
+table(customers) {
+  primary_key(id)
   first_name varchar(50) not null
   last_name varchar(50) not null
   phone varchar(20) not null
   email varchar(100) not null
-  user_id uuid
-  created_at timestamp not null
-  updated_at timestamp not null
   identity_document text
+  user_id uuid
+  created_at timestamp default now() not null
+  updated_at timestamp default now() not null
 }
 
-Table(agents, "Agents") {
-  primary_key(id integer)
+table(agents) {
+  primary_key(id)
   first_name varchar(50) not null
   last_name varchar(50) not null
   city varchar(50) not null
-  commission_percentage numeric(5,2) not null
+  commission_percentage numeric(5, 2) not null
   user_id uuid not null
-  created_at timestamp not null
-  updated_at timestamp not null
+  created_at timestamp default now() not null
+  updated_at timestamp default now() not null
 }
 
-Table(attachments, "Attachments") {
-  primary_key(id integer)
+table(attachments) {
+  primary_key(id)
   model_name varchar(100) not null
   model_id integer not null
   file_name varchar(100) not null
   file_type varchar(100) not null
   file_size integer not null
   url varchar(100) not null
-  created_at timestamp not null
-  updated_at timestamp not null
+  created_at timestamp default now() not null
+  updated_at timestamp default now() not null
 }
 
-Table(cities, "Cities") {
-  primary_key(id integer)
+table(cities) {
+  primary_key(id)
   name varchar(50) not null
-  created_at timestamp not null
-  updated_at timestamp not null
+  created_at timestamp default now() not null
+  updated_at timestamp default now() not null
 }
 
-Table(properties, "Properties") {
-  primary_key(id integer)
+table(properties) {
+  primary_key(id)
   operation_type varchar(20) not null
   address text not null
   photos bytea[]
   owners varchar(200)
-  property_price numeric(10,2) not null
-  availability_status varchar(20) not null
+  property_price numeric(10, 2) not null
+  availability_status varchar(20) default 'available'::character varying not null
   agent_id integer
-  created_at timestamp not null
-  updated_at timestamp not null
   customer_id integer
   city_id integer
   property_type text not null
-  latitude double precision not null
+  latitude double precision default '0'::double precision
   longitude double precision
   property_size double precision
+  foreign_key(agent_id)
+  foreign_key(customer_id)
+  foreign_key(city_id)
 }
 
-Table(interested_customers, "Interested Customers") {
-  primary_key(id integer)
+table(interested_customers) {
+  primary_key(id)
   customer_id integer not null
   property_id integer not null
-  deposit_amount numeric(10,2) not null
-  created_at timestamp not null
-  updated_at timestamp not null
+  deposit_amount numeric(10, 2) not null
+  created_at timestamp default now() not null
+  updated_at timestamp default now() not null
+  foreign_key(customer_id)
+  foreign_key(property_id)
 }
 
-customers --|> auth.users : user_id
-agents --|> auth.users : user_id
-properties --|> agents : agent_id
-properties --|> customers : customer_id
-properties --|> cities : city_id
-interested_customers --|> customers : customer_id
-interested_customers --|> properties : property_id
-attachments --|> properties : model_id
-
+properties -- agents
+properties -- customers
+properties -- cities
+interested_customers -- customers
+interested_customers -- properties
+customers -- auth.users : user_id
+agents -- auth.users : user_id
 @enduml
