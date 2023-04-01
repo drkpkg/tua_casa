@@ -24,6 +24,8 @@ export class PropertyNewComponent implements OnInit {
       customerId: new FormControl('', [Validators.required]),
       latitude: new FormControl('', [Validators.required]),
       longitude: new FormControl('', [Validators.required]),
+      operationType: new FormControl('', [Validators.required]),
+      propertyPrice: new FormControl('', [Validators.required]),
     });
     this.customers = [];
     this.onMapChange = (lat: number, lng: number) => {
@@ -42,7 +44,7 @@ export class PropertyNewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.supabaseService.getCustomerView({customer_type: "0"}).then(({data, error}) => {
+    this.supabaseService.getCustomerView().then(({data, error}) => {
       if (error) {
         console.log(error);
       } else if (data) {
@@ -61,6 +63,8 @@ export class PropertyNewComponent implements OnInit {
       this.formGroup.get('customerId')?.value,
       this.formGroup.get('latitude')?.value,
       this.formGroup.get('longitude')?.value,
+      this.formGroup.get('operationType')?.value,
+      this.formGroup.get('propertyPrice')?.value,
     ).then(({data, error}) => {
       if (error) {
         console.log(error);

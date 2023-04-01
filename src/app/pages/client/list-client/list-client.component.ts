@@ -47,8 +47,7 @@ export class ListClientComponent implements OnInit {
   }
 
   private loadData() {
-    let condition = this.selectedType === "all" ? {} : {customer_type: this.selectedType};
-    this.supabaseService.getCustomerView(condition).then(({data, error}) => {
+    this.supabaseService.getCustomerView().then(({data, error}) => {
       let dataValue: any = data;
       if (error) {
         console.log('error', error)

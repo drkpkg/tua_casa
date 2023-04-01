@@ -20,7 +20,7 @@
       <td>{{data.address}}</td>
       <td>{{data.property_type ? data.property_type == 'house' ? 'Casa' : 'Departamento' : ''}}</td>
       <td>{{data.property_size}} mt2</td>
-      <td>{{data.customer.person.name}} {{data.customer.person.surname}} {{data.customer.person.lastname}}</td>
+      <td>{{data.customer.first_name}} {{data.customer.last_name}}</td>
       <td>
         <a routerLink="/properties/{{data.id}}">Ver</a>
         <nz-divider nzType="vertical"></nz-divider>

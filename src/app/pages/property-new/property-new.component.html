@@ -20,6 +20,17 @@
     <nz-form-item>
       <nz-form-control>
         <nz-input-group>
+          <nz-select nzPlaceHolder="Tipo de operacion" formControlName="operationType">
+            <nz-option nzLabel="Venta" nzValue="0"></nz-option>
+            <nz-option nzLabel="Alquiler" nzValue="1"></nz-option>
+            <nz-option nzLabel="Anticretico" nzValue="2"></nz-option>
+          </nz-select>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
           <nz-select nzPlaceHolder="Propietario" formControlName="customerId">
             <nz-option *ngFor="let customer of customers" [nzLabel]="customer.name" [nzValue]="customer.id"></nz-option>
           </nz-select>
@@ -30,6 +41,13 @@
       <nz-form-control>
         <nz-input-group>
           <input nz-input placeholder="Tamaño de la propiedad" formControlName="propertySize" type="number" min="0"/>
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group>
+          <input nz-input placeholder="Precio" formControlName="propertyPrice" type="number" min="0"/>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>

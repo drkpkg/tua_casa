@@ -64,7 +64,7 @@ export class PropertyDocumentComponent implements OnInit {
   }
 
   getDocumentUrl(document: any) {
-    return `${environment.supabaseUrl}/storage/v1/object/public/tuacasa-storage/${document.url}`
+    return `${environment.supabaseUrl}/storage/v1/object/public/storage/${document.url}`
   }
 
   deleteDocument(id: number, modelId: number, filename: string, uuid: string) {

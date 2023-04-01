@@ -87,8 +87,8 @@ export class SupabaseService {
     return {data, error};
   }
 
-  async getCustomerView(condition: any) {
-    const {data, error} = await this.supabase.from('customer_view').select('*').match(condition);
+  async getCustomerView() {
+    const {data, error} = await this.supabase.from('customer_view').select('*');
     return {data, error};
   }
 
@@ -228,12 +228,12 @@ export class SupabaseService {
     const {
       data,
       error
-    } = await this.supabase.from('properties').select('id, address, property_type, property_size, latitude, longitude, customer: customer_id (id, person: person_id (name, surname, lastname, identity_document))')
+    } = await this.supabase.from('properties').select('id, address, property_size, property_price, availability_status, property_type, agent: agent_id(id, first_name, last_name), customer: customer_id (id, first_name, last_name, identity_document, phone, email)')
     return {data, error};
   }
 
 
-  async createProperty(address: string, propertyType: string, propertySize: string, customerId: string, latitude: number, longitude: number) {
+  async createProperty(address: string, propertyType: string, propertySize: string, customerId: string, latitude: number, longitude: number, operationType: number, propertyPrice: number) {
     const {data, error} = await this.supabase.from('properties').insert([
       {
         address: address,
@@ -242,19 +242,21 @@ export class SupabaseService {
         customer_id: customerId,
         latitude: latitude,
         longitude: longitude,
+        operation_type: operationType,
+        property_price: propertyPrice
       }]);
     return {data, error};
   }
 
   async getProperty(id: number) {
     const {data, error} = await this.supabase.from('properties')
-      .select('id, address, property_type, property_size, latitude, longitude, customer: customer_id (id, person: person_id (name, surname, lastname, identity_document))')
+      .select('id, address, property_size, property_price, availability_status, property_type, latitude, longitude, agent: agent_id(id, first_name, last_name), customer: customer_id (id, first_name, last_name, identity_document, phone, email)')
       .eq('id', id)
     return {data, error};
   }
 
   async getPropertyDocuments(id: number, modelName: string) {
-    const {data, error} = await this.supabase.from('documents')
+    const {data, error} = await this.supabase.from('attachments')
       .select('*').eq('model_id', id).eq('model_name', modelName)
     return {data, error};
   }
@@ -266,7 +268,7 @@ export class SupabaseService {
       stringArr.push(S4);
     }
     const uuid = stringArr.join('-');
-    const {data: storageData, error: storageError} = await this.supabase.storage.from('tuacasa-storage')
+    const {data: storageData, error: storageError} = await this.supabase.storage.from('storage')
       .upload(`${modelName}/${id}/${uuid}/${documentFile.name}`, documentFile, {
         cacheControl: '3600',
         upsert: false,
@@ -275,13 +277,14 @@ export class SupabaseService {
       return {data: null, error: storageError};
     }
     // create document, storage returns the url
-    const {data, error} = await this.supabase.from('documents').insert([
+    const {data, error} = await this.supabase.from('attachments').insert([
       {
         model_id: id,
         model_name: modelName,
+        file_name: documentFile.name,
+        file_type: documentFile.type,
+        file_size: documentFile.size,
         url: storageData?.path,
-        uuid: uuid,
-        filename: documentFile.name,
       }]);
     return {data, error};
   }

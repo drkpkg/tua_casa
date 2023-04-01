@@ -53,7 +53,7 @@ export class NewSaleComponent implements OnInit {
 
   ngOnInit() {
     this.saleRepository.updateSale(this.sale)
-    this.supabaseService.getCustomerView({}).then(({data, error}) => {
+    this.supabaseService.getCustomerView().then(({data, error}) => {
       if (error) {
         console.log(error);
       } else {
