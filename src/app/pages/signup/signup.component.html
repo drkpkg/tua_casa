@@ -1,6 +1,6 @@
 <div class="signup-container">
   <h2>Iniciar sesión</h2>
-  <img src="https://ng.ant.design/assets/img/logo.svg" alt="Imagen de inicio de sesión">
+  <img src="/assets/img/logo.png" alt="Imagen de inicio de sesión">
   <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" nz-form [nzLayout]="'horizontal'">
     <nz-form-item>
       <nz-form-control>
@@ -71,7 +71,7 @@
     <nz-form-item>
       <nz-form-control>
         <nz-input-group>
-          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="En Tua casa quiero" formControlName="customer_type">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Quiero" formControlName="customer_type">
             <nz-option nzLabel="Quiero buscar alquiler" nzValue="0"></nz-option>
             <nz-option nzLabel="Quiero alquilar" nzValue="1"></nz-option>
             <nz-option nzLabel="Quiero hacer ambos" nzValue="2"></nz-option>

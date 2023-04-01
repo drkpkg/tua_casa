@@ -100,17 +100,17 @@ const routes: Routes = [
     pathMatch: "full",
   },
   {
-    path: 'rents',
+    path: 'properties-transfers',
     loadChildren: () => import('./pages/rent/rent.module').then(m => m.RentModule),
     pathMatch: "full",
   },
   {
-    path: 'rents/:id/info',
+    path: 'properties-transfers/:id/info',
     loadChildren: () => import('./pages/rent-info/rent-info.module').then(m => m.RentInfoModule),
     pathMatch: "full",
   },
   {
-    path: 'rents/new',
+    path: 'properties-transfers/new',
     loadChildren: () => import('./pages/rent-new/rent-new.module').then(m => m.RentNewModule),
     pathMatch: "full",
   },

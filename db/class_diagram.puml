@@ -1,73 +1,78 @@
 @startuml
-
 class customers {
-    +id: integer
-    +first_name: string
-    +last_name: string
-    +phone: string
-    +email: string
-    +user_id: uuid
+    -id: serial
+    -first_name: varchar(50)
+    -last_name: varchar(50)
+    -phone: varchar(20)
+    -email: varchar(100)
+    -user_id: uuid
+    -created_at: timestamp
+    -updated_at: timestamp
+    -identity_document: text
 }
 
 class agents {
-    +id: integer
-    +first_name: string
-    +last_name: string
-    +city: string
-    +commission_percentage: numeric
-    +user_id: uuid
-}
-
-class properties {
-    +id: integer
-    +operation_type: string
-    +location: string
-    +size: numeric
-    +photos: bytea[]
-    +owners: string
-    +price: numeric
-    +availability_status: string
-    -agent_id: integer
-    -customer_id: integer
-}
-
-class interested_customers {
-    +id: integer
-    -customer_id: integer
-    -property_id: integer
-    +deposit_amount: numeric
-}
-
-class customer_properties {
-    +id: integer
-    -customer_id: integer
-    -property_id: integer
-}
-
-class property_transfers {
-    +id: integer
-    -property_id: integer
-    -seller_id: integer
-    -buyer_id: integer
-    +transfer_date: date
-    +sale_price: numeric
+    -id: serial
+    -first_name: varchar(50)
+    -last_name: varchar(50)
+    -city: varchar(50)
+    -commission_percentage: numeric(5,2)
+    -user_id: uuid
+    -created_at: timestamp
+    -updated_at: timestamp
 }
 
 class attachments {
-    +id: integer
-    +model_name: string
-    +model_id: integer
-    +file_name: string
-    +file_type: string
-    +file_size: integer
-    +url: string
+    -id: serial
+    -model_name: varchar(100)
+    -model_id: integer
+    -file_name: varchar(100)
+    -file_type: varchar(100)
+    -file_size: integer
+    -url: varchar(100)
+    -created_at: timestamp
+    -updated_at: timestamp
 }
 
-customers --> agents
-agents --> properties
-customers --> interested_customers
-customers --> customer_properties
-properties --> property_transfers
-attachments --> properties
+class cities {
+    -id: serial
+    -name: varchar(50)
+    -created_at: timestamp
+    -updated_at: timestamp
+}
+
+class properties {
+    -id: serial
+    -operation_type: varchar(20)
+    -address: text
+    -photos: bytea[]
+    -owners: varchar(200)
+    -property_price: numeric(10,2)
+    -availability_status: varchar(20)
+    -agent_id: integer
+    -created_at: timestamp
+    -updated_at: timestamp
+    -customer_id: integer
+    -city_id: integer
+    -property_type: text
+    -latitude: double precision
+    -longitude: double precision
+    -property_size: double precision
+}
+
+class interested_customers {
+    -id: serial
+    -customer_id: integer
+    -property_id: integer
+    -deposit_amount: numeric(10,2)
+    -created_at: timestamp
+    -updated_at: timestamp
+}
+
+customers -- agents
+agents -- properties
+properties -- interested_customers
+attachments -- properties
+cities -- properties
 
 @enduml

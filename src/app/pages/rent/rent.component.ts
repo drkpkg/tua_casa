@@ -15,7 +15,7 @@ export class RentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.supabaseService.getRentals().then(({data, error}) => {
+    this.supabaseService.getTransfers().then(({data, error}) => {
       if (error) {
         console.log(error);
       } else {

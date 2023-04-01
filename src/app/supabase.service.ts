@@ -216,11 +216,11 @@ export class SupabaseService {
     return {data, error};
   }
 
-  async getRentals() {
+  async getTransfers() {
     const {
       data,
       error
-    } = await this.supabase.from('rentals').select('id, start_date, end_date, amount, property: property_id (id, address, property_type, property_size, latitude, longitude, customer: customer_id (id, person: person_id (name, surname, lastname, identity_document))), created_at')
+    } = await this.supabase.from('property_transfers').select('id, sale_price, transfer_date, property: property_id (id, address), owner: seller_id (id, first_name, last_name), buyer: buyer_id (id, first_name, last_name))')
     return {data, error};
   }
 
@@ -291,7 +291,7 @@ export class SupabaseService {
 
   async deleteDocument(id: number, modelId: number, modelName: string, uuid: string, filename: string) {
     const {data, error} = await this.supabase.from('documents').delete().eq('id', id);
-    await this.supabase.storage.from('tuacasa-storage').remove([`${modelName}/${modelId}/${uuid}/${filename}`]);
+    await this.supabase.storage.from('storage').remove([`${modelName}/${modelId}/${uuid}/${filename}`]);
     return {data, error};
   }
 
